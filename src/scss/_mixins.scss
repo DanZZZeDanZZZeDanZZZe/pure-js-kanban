@@ -1,0 +1,31 @@
+@mixin button($color: black) {
+  @include cleared-button();
+  height: 30px;
+  min-width: 30px;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  border-radius: 3px;
+
+  & i {
+    font-size: 24px;
+  }
+
+  &:active, &.active {
+    color: $color;
+  }
+
+  &:hover {
+    background: rgba(238, 238, 238, 0.548);
+    cursor: pointer;
+  }
+}
+
+@mixin cleared-button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  outline: none;
+  background-color: transparent;
+}

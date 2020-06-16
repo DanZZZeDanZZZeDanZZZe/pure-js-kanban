@@ -1,0 +1,27 @@
+.footer {
+  &-statistics {
+    p {
+      display: block;
+      margin-right: 15px;
+    }
+    display: flex;
+    width: 400px;
+  }
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: $footer-height;
+  background: $primary-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  padding: 3px 30px 0px;
+}
+
+@mixin mobile-footer {
+  .footer {
+    display: none;
+  }
+}

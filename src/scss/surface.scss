@@ -1,0 +1,35 @@
+.surface {
+  .card-holder {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-top: 20px;
+  }
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: $footer-height;
+  top: $header-height;
+  background: $color-auxiliary;
+}
+
+@mixin mobile-surface {
+  .surface {
+    .card-holder {
+      display: block;
+      height: none;
+      padding-top: $header-height;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    top: 0;
+    bottom: 0;
+  }
+}
+
+   
+

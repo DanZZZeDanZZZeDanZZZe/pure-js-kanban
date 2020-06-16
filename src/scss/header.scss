@@ -1,0 +1,35 @@
+.header {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: $header-height;
+  background: $primary-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 30px;
+
+  & button {
+    @include button();
+  }
+}
+
+@mixin mobile-header {
+  .header {
+    height: $header-height * 0.8;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.171);
+    justify-content: center;
+
+    & h1 {
+      font-size: 0.8rem;
+    }
+
+    & .user-menu {
+      color: black;
+      position: absolute;
+      right: 10px;
+    }
+  }
+}

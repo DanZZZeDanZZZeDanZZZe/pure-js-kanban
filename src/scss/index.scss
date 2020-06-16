@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import "~normalize.css";
+
+@import "variables";
+@import "mixins";
+@import "header";
+@import "surface";
+@import "card";
+@import "footer";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  overflow: hidden;
+}
+
+.kanban {
+  position: relative;
+  height: 100%;
+  max-width: 100%;
+  color: rgb(231, 226, 226);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+@media screen and (
+    $media-screen-param: 
+    $media-param-value
+) {
+  @include mobile-header;
+  @include mobile-surface;
+  @include mobile-card;
+  @include mobile-footer;
+}
