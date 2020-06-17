@@ -1,6 +1,6 @@
 const CONSTRUCTOR_ERROR =
     'The parameter must be either a string or an HTML element'
-const CREATE_ERROR =
+const CLASSES_ERROR =
     'The parameter must be either a string or an instance of Array'
 
 
@@ -21,20 +21,28 @@ class DOMWrapper {
     this.el.insertAdjacentHTML(pos, text)
     return this
   }
+
+  insertClasses(classNames) {
+    if (typeof classNames === 'string') {
+      classNames = classNames.trim().split(' ')
+    }
+    if (classNames instanceof Array) {
+      this.el.classList.add(...classNames)
+      return this
+    }
+    throw new Error(CLASSES_ERROR)
+  }
 }
 
-export function $(el) {
+function $(el) {
   return new DOMWrapper(el)
 }
 
-$.create = (tagName, classNames) => {
+$.create = (tagName, classNames = []) => {
   const el = document.createElement(tagName)
-  if (typeof classNames === 'string') {
-    classNames = classNames.trim().split(' ')
-  }
-  if (classNames instanceof Array) {
-    classNames.forEach(className => el.classList.add(className))
-    return $(el)
-  }
-  throw new Error(CREATE_ERROR)
+  const $el = $(el).insertClasses(classNames)
+  return $el
 }
+
+export {$, DOMWrapper}
+
