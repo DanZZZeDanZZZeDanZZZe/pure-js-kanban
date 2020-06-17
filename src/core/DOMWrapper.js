@@ -16,6 +16,11 @@ class DOMWrapper {
     }
     throw new Error(CONSTRUCTOR_ERROR)
   }
+
+  insertHTML(text, pos = 'afterbegin') {
+    this.el.insertAdjacentHTML(pos, text)
+    return this
+  }
 }
 
 export function $(el) {
