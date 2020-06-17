@@ -1,8 +1,7 @@
-const CONSTRUCTOR_ERROR =
-    'The parameter must be either a string or an HTML element'
-const CLASSES_ERROR =
-    'The parameter must be either a string or an instance of Array'
+import {errorMessages, utils} from '@core/framework'
 
+const {STR_HTML_ERROR, STR_ARR_ERROR} = errorMessages
+const {adjustEl} = utils
 
 class DOMWrapper {
   constructor(el) {
@@ -14,12 +13,17 @@ class DOMWrapper {
       this.el = el
       return this
     }
-    throw new Error(CONSTRUCTOR_ERROR)
+    throw new Error(STR_HTML_ERROR)
   }
 
   insertHTML(text, pos = 'afterbegin') {
     this.el.insertAdjacentHTML(pos, text)
     return this
+  }
+
+  append(el) {
+    const $el = adjustEl(el)
+    this.el.append($el.el)
   }
 
   insertClasses(classNames) {
@@ -30,7 +34,7 @@ class DOMWrapper {
       this.el.classList.add(...classNames)
       return this
     }
-    throw new Error(CLASSES_ERROR)
+    throw new Error(STR_ARR_ERROR)
   }
 }
 
