@@ -16,6 +16,14 @@ class DOMWrapper {
     throw new Error(STR_HTML_ERROR)
   }
 
+  html(text, pos) {
+    if (text) {
+      this.insertHTML(text, pos)
+      return this
+    }
+    return this.el.outerHTML
+  }
+
   insertHTML(text, pos = 'afterbegin') {
     this.el.insertAdjacentHTML(pos, text)
     return this
