@@ -1,6 +1,7 @@
 import DOMListener from './DOMListener'
 
 class AppComponent extends DOMListener {
+  static supervisor = null
   classNames = ''
   html = ''
 
@@ -16,4 +17,4 @@ class AppComponent extends DOMListener {
   }
 }
 
-export default AppComponent
+export {AppComponent}

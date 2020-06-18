@@ -1,10 +1,8 @@
-import {ComponentFactory, $} from '@core/framework'
-import {Header, Surface, Footer} from './components'
 import './scss/index.scss'
+import {createApp} from './core/AppFactory'
+import Kanban from './components/kanban/Kanban'
 
-const $app = document.getElementById('app')
-const $wrap = $.create('div', 'kanban')
-const appFactory = new ComponentFactory([Header, Surface, Footer])
-
-appFactory.createStructure($wrap).render($app)
-
+createApp(
+    document.getElementById('app'),
+    Kanban
+)
