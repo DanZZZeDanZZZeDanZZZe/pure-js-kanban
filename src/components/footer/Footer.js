@@ -1,4 +1,4 @@
-const {AppComponent} = require('@core/framework');
+import {AppComponent} from '@core/framework'
 
 class Footer extends AppComponent {
   constructor($root) {
