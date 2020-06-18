@@ -1,6 +1,7 @@
 import {COMPONENT_INSTANCES} from './errorMessages'
 import {AppComponent} from './AppComponent'
 import {$} from './DOMWrapper'
+import {AppFactory} from './AppFactory'
 
 const message = COMPONENT_INSTANCES
 
@@ -30,8 +31,8 @@ class ComponentFactory {
 
   notifyApp() {
     const register = $comp => {
-      AppComponent
-          .supervisor
+      AppFactory
+          .singleton
           .components
           .push($comp)
     }

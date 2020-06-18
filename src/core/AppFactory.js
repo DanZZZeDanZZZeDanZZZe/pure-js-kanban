@@ -1,19 +1,16 @@
 import {comp} from './ComponentFactory'
 import {adjustEl} from './utils'
-import {AppComponent} from './framework'
+
+import {createEventManager} from './eventManager'
 
 export class AppFactory {
   static singleton = null
 
   constructor(rootConstructor) {
     this.root = rootConstructor
-    this.singleton = this
     this.components = []
-  }
-
-  trackСomponents(CompClass) {
-    CompClass.supervisor = this
-    return this
+    this.eventManager = createEventManager()
+    AppFactory.singleton = this
   }
 
   createTemplate() {
@@ -33,7 +30,6 @@ export function createApp(mountPoint, constructor) {
   if (AppFactory.singleton) return AppFactory.singleton
 
   return new AppFactory(constructor)
-      .trackСomponents(AppComponent)
       .createTemplate()
       .render(mountPoint)
 }
