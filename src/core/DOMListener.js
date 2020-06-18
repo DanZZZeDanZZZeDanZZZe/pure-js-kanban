@@ -1,6 +1,6 @@
 class DOMListener {
-  constructor($root, listeners = []) {
-    this.$root = $root
+  constructor(id, listeners = []) {
+    this.id = id
   }
 }
 

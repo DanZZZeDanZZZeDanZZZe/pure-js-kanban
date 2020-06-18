@@ -5,11 +5,11 @@ class AppComponent extends DOMListener {
   classNames = ''
   html = ''
 
-  constructor($root, options) {
+  constructor($id, options) {
     const listeners = listeners in options ?
       options.listeners :
       []
-    super($root, options.listeners)
+    super($id, options.listeners)
   }
 
   getRoot() {

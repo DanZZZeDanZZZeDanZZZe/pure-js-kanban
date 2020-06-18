@@ -24,6 +24,7 @@ export class AppFactory {
   render(mountPoint) {
     const $point = adjustEl(mountPoint)
     $point.html(this.template)
+    console.log(this)
     return this
   }
 }
