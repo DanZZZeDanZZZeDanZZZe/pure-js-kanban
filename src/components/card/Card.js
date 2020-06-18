@@ -1,11 +1,11 @@
 import {AppComponent} from '@core/framework'
 
 class Card extends AppComponent {
-  constructor($root) {
+  constructor(id) {
     const options = {
 
     }
-    super($root, options)
+    super(id, options)
   }
 
   classNames = 'card'

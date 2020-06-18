@@ -5,11 +5,11 @@ import Surface from '../surface/Surface';
 import Footer from '../footer/Footer';
 
 class Kanban extends AppComponent {
-  constructor($root) {
+  constructor(id) {
     const options = {
 
     }
-    super($root, options)
+    super(id, options)
   }
 
   classNames = 'kanban'

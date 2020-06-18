@@ -14,11 +14,11 @@ class Header extends AppComponent {
     </div>
   `
 
-  constructor($root) {
+  constructor(id) {
     const options = {
 
     }
-    super($root, options)
+    super(id, options)
   }
 }
 
