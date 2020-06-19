@@ -1,4 +1,4 @@
-import {AppComponent} from '@core/framework'
+import {AppComponent} from '@core'
 
 class Header extends AppComponent {
   classNames = 'header'

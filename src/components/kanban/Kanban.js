@@ -1,4 +1,4 @@
-import {AppComponent, comp} from '@core/framework'
+import {AppComponent, comp} from '@core'
 
 import Header from '../header/Header';
 import Surface from '../surface/Surface';

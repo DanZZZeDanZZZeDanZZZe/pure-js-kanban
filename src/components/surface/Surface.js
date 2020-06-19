@@ -1,4 +1,4 @@
-import {AppComponent, comp} from '@core/framework'
+import {AppComponent, comp} from '@core'
 import Card from '../card/Card';
 
 class Surface extends AppComponent {
