@@ -21,9 +21,9 @@ export class AppFactory {
   }
 
   render(mountPoint) {
-    // this.components.forEach(comp => comp.init())
     const $point = adjustEl(mountPoint)
     $point.html(this.template)
+    this.components.forEach(comp => comp.connect($point))
     console.log(this)
     return this
   }

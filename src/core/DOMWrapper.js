@@ -51,6 +51,15 @@ class DOMWrapper {
     }
     return this
   }
+
+  find(selector) {
+    return $(this.el.querySelector(selector))
+  }
+
+  findData(name, value) {
+    return $(this.el)
+        .find(`[data-${name}="${value}"]`)
+  }
 }
 
 function $(el) {

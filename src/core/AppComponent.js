@@ -11,8 +11,8 @@ class AppComponent extends DOMListener {
     super(options.listeners)
   }
 
-  getRoot() {
-    return this.$root
+  connect($mountPoint) {
+    this.connectElement($mountPoint)
   }
 }
 

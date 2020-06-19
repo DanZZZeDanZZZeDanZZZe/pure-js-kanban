@@ -18,7 +18,7 @@ class ComponentFactory {
         throw new Error(message)
       }
 
-      instance.id = AppFactory.singleton.сompCounter++ || 0
+      instance.id = `${AppFactory.singleton.сompCounter++ || 0}`
       return instance
     })
     return this
@@ -52,7 +52,7 @@ class ComponentFactory {
 function constructComponent(obj) {
   return $
       .create('div')
-      .dataset('id', `${obj.id}`)
+      .dataset('id', obj.id)
       .insertClasses(obj.classNames)
       .html(obj.html)
 }
