@@ -6,9 +6,8 @@ import {AppFactory} from './AppFactory'
 const message = COMPONENT_INSTANCES
 
 class ComponentFactory {
-  constructor(constructors, parentId) {
+  constructor(constructors) {
     this.constructors = constructors
-    this.id = parentId
   }
 
   constructInstances() {
@@ -18,6 +17,8 @@ class ComponentFactory {
         delete this.$components
         throw new Error(message)
       }
+
+      instance.id = AppFactory.singleton.сompCounter++ || 0
       return instance
     })
     return this
@@ -56,7 +57,7 @@ function constructComponent(obj) {
 }
 
 function createComponents(...constructors) {
-  return new ComponentFactory(constructors, 1)
+  return new ComponentFactory(constructors, )
       .constructInstances()
       .constructComponents()
       .notifyApp()

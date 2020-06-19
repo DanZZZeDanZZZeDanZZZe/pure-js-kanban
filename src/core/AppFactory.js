@@ -8,13 +8,15 @@ export class AppFactory {
 
   constructor(rootConstructor) {
     this.root = rootConstructor
-    this.components = []
     this.eventManager = createEventManager()
     AppFactory.singleton = this
   }
 
   createTemplate() {
+    this.components = []
+    this.сompCounter = null
     this.template = comp(this.root)
+    delete this.сompCounter
     return this
   }
 
