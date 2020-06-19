@@ -1,11 +1,11 @@
 import {AppComponent} from '@core/framework'
 
 class Footer extends AppComponent {
-  constructor(id) {
+  constructor() {
     const options = {
 
     }
-    super(id, options)
+    super(options)
   }
 
   classNames = 'footer'

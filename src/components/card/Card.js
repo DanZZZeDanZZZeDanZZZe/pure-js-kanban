@@ -1,11 +1,11 @@
 import {AppComponent} from '@core/framework'
 
 class Card extends AppComponent {
-  constructor(id) {
+  constructor() {
     const options = {
 
     }
-    super(id, options)
+    super(options)
   }
 
   classNames = 'card'

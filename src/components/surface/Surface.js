@@ -9,11 +9,11 @@ class Surface extends AppComponent {
     }
   </div>`
 
-  constructor(id) {
+  constructor() {
     const options = {
 
     }
-    super(id, options)
+    super(options)
   }
 }
 
