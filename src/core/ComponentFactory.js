@@ -52,6 +52,7 @@ class ComponentFactory {
 function constructComponent(obj) {
   return $
       .create('div')
+      .dataset('id', `${obj.id}`)
       .insertClasses(obj.classNames)
       .html(obj.html)
 }

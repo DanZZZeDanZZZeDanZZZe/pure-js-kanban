@@ -44,6 +44,13 @@ class DOMWrapper {
     }
     throw new Error(STR_ARR_ERROR)
   }
+
+  dataset(name, value) {
+    if (name && value) {
+      this.el.dataset[name] = value
+    }
+    return this
+  }
 }
 
 function $(el) {

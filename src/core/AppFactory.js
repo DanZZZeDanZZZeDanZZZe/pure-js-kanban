@@ -9,11 +9,11 @@ export class AppFactory {
   constructor(rootConstructor) {
     this.root = rootConstructor
     this.eventManager = createEventManager()
+    this.components = []
     AppFactory.singleton = this
   }
 
   createTemplate() {
-    this.components = []
     this.сompCounter = null
     this.template = comp(this.root)
     delete this.сompCounter
@@ -21,6 +21,7 @@ export class AppFactory {
   }
 
   render(mountPoint) {
+    // this.components.forEach(comp => comp.init())
     const $point = adjustEl(mountPoint)
     $point.html(this.template)
     console.log(this)
