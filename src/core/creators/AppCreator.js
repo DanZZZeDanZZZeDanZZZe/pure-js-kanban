@@ -1,3 +1,4 @@
+import {ComponentRegister} from '../registers'
 import {createEventManager} from '../eventManager'
 import {Creator} from './Creator'
 
@@ -7,7 +8,7 @@ export class AppCreator extends Creator {
   constructor(mountPoint, rootConstructor) {
     super(mountPoint, rootConstructor)
     this.eventManager = createEventManager()
-    this.compsRegister = []
+    this.compsRegister = new ComponentRegister([])
     AppCreator.singleton = this
   }
 
@@ -17,10 +18,7 @@ export class AppCreator extends Creator {
   }
 
   connect() {
-    const connect = comp => {
-      return comp.connect(this.$point)
-    }
-    this.compsRegister.forEach(connect)
+    this.compsRegister.connect(this.$point)
   }
 
   static init(mountPoint, constructor) {

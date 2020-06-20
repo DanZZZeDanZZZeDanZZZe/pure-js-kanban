@@ -31,12 +31,7 @@ class ComponentFactory {
   }
 
   notifyApp() {
-    const register = $comp => {
-      AppCreator
-          .compsRegister
-          .push($comp)
-    }
-    this.componentInstances.forEach(register)
+    AppCreator.compsRegister.add(this.componentInstances)
     return this
   }
 

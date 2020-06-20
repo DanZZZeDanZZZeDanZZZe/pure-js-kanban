@@ -4,13 +4,22 @@ import {AppCreator} from './AppCreator'
 export class CompCreator extends Creator {
   constructor(mountPoint, rootConstructor) {
     super(mountPoint, rootConstructor)
-    this.prevCompsLen = AppCreator.compsRegister.length
+    this.register = AppCreator.compsRegister
+    this.prevRegLen = this.register.content.length
+    this.$appRoot = AppCreator.$root
   }
 
   connect() {
-    const newComps = AppCreator.compsRegister.slice(this.prevCompsLen)
-    newComps.forEach(comp => comp.connect(AppCreator.$root))
+    this.register.connect(this.$appRoot, this.prevRegLen)
     return this
+  }
+
+  static update(id) {
+    const instance = AppCreator
+        .compsRegister
+        .findComponent(id)
+    const {$root, constructor} = instance
+    return this.init($root, constructor)
   }
 
   static init(mountPoint, constructor) {

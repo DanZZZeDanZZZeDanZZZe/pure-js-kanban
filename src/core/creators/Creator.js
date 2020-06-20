@@ -1,5 +1,7 @@
 import {comp} from '../ComponentFactory'
-import {adjustEl} from '../utils'
+import utils from '../utils'
+
+const {adjustEl} = utils
 
 export class Creator {
   constructor(mountPoint, rootConstructor) {
@@ -18,7 +20,7 @@ export class Creator {
   }
 
   replace() {
-    this.$point.inner(this.template)
+    this.$point.outer(this.template)
     return this
   }
 }

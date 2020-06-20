@@ -66,6 +66,10 @@ class DOMWrapper {
         .find(`[data-${name}="${value}"]`)
   }
 
+  findByDataID(id) {
+    return this.findData('id', id)
+  }
+
   outer(html) {
     if (html) {
       this.el.outerHTML= html
