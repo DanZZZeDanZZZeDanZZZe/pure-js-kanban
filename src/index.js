@@ -1,8 +1,8 @@
 import './scss/index.scss'
-import {createApp} from './core/AppFactory'
 import Kanban from './components/kanban/Kanban'
+import {AppCreator} from '@/core'
 
-createApp(
+AppCreator.init(
     document.getElementById('app'),
     Kanban
 )

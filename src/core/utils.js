@@ -1,4 +1,4 @@
-import {DOMWrapper, $, errorMessages} from '@core/framework'
+import {DOMWrapper, $, errorMessages} from '@core'
 
 const {WRAPPER_HTML_ERROR} = errorMessages
 function adjustEl(el) {

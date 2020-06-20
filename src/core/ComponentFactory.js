@@ -1,7 +1,7 @@
 import {COMPONENT_INSTANCES} from './errorMessages'
 import {AppComponent} from './AppComponent'
 import {$} from './DOMWrapper'
-import {AppFactory} from './AppFactory'
+import {AppCreator} from './creators'
 
 const message = COMPONENT_INSTANCES
 
@@ -18,7 +18,7 @@ class ComponentFactory {
         throw new Error(message)
       }
 
-      instance.id = `${AppFactory.singleton.сompCounter++ || 0}`
+      instance.id = `${AppCreator.singleton.сompCounter++ || 0}`
       return instance
     })
     return this
@@ -32,9 +32,8 @@ class ComponentFactory {
 
   notifyApp() {
     const register = $comp => {
-      AppFactory
-          .singleton
-          .components
+      AppCreator
+          .compsRegister
           .push($comp)
     }
     this.componentInstances.forEach(register)

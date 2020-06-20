@@ -1,4 +1,4 @@
-import {errorMessages, utils} from '@core/framework'
+import {errorMessages, utils} from '@core'
 
 const {STR_HTML_ERROR, STR_ARR_ERROR} = errorMessages
 const {adjustEl} = utils
@@ -34,6 +34,11 @@ class DOMWrapper {
     this.el.append($el.el)
   }
 
+  get parent() {
+    const node = $(this.el.parentNode)
+    return node
+  }
+
   insertClasses(classNames) {
     if (typeof classNames === 'string') {
       classNames = classNames.trim().split(' ')
@@ -57,8 +62,24 @@ class DOMWrapper {
   }
 
   findData(name, value) {
-    return $(this.el)
+    return this
         .find(`[data-${name}="${value}"]`)
+  }
+
+  outer(html) {
+    if (html) {
+      this.el.outerHTML= html
+      return this
+    }
+    return this.el.outerHTML
+  }
+
+  inner(html) {
+    if (html) {
+      this.el.innerHTML= html
+      return this
+    }
+    return this.el.innerHTML
   }
 }
 

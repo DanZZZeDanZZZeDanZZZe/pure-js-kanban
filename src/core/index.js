@@ -5,7 +5,7 @@ import {comp} from '@core/ComponentFactory'
 import DOMListener from '@core/DOMListener'
 import {DOMWrapper, $} from '@core/DOMWrapper'
 import {createEventManager} from '@core/eventManager'
-import {createApp} from '@core/AppFactory'
+import {AppCreator, CompCreator} from '@core/creators'
 
 export {
   errorMessages,
@@ -13,7 +13,8 @@ export {
   AppComponent,
   DOMListener,
   DOMWrapper,
-  createApp,
+  AppCreator,
+  CompCreator,
   utils,
   comp,
   $
