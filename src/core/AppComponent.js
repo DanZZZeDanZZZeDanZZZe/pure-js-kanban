@@ -1,4 +1,5 @@
 import DOMListener from './DOMListener'
+import {AppCreator} from './creators'
 
 class AppComponent extends DOMListener {
   classNames = ''
@@ -13,6 +14,16 @@ class AppComponent extends DOMListener {
 
   connect($mountPoint) {
     this.connectElement($mountPoint)
+  }
+
+  subscribe(eventName, action) {
+    AppCreator.eventManager
+        .subscribe(eventName, action)
+  }
+
+  notify(eventName, arg) {
+    AppCreator.eventManager
+        .notify(eventName, arg)
   }
 }
 
