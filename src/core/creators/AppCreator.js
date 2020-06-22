@@ -21,9 +21,9 @@ export class AppCreator extends Creator {
     return super.connect(this.$point)
   }
 
-  static init(mountPoint, constructor) {
+  static init(mountPoint, constructor, options) {
     if (this.singleton) return this.singleton
-    return new this(mountPoint, constructor)
+    return new this(mountPoint, constructor, options)
         .createTemplate()
         .addTo()
         .connect()

@@ -2,8 +2,8 @@ import {Creator} from './Creator'
 import {AppCreator} from './AppCreator'
 
 export class CompCreator extends Creator {
-  constructor(mountPoint, rootConstructor) {
-    super(mountPoint, rootConstructor)
+  constructor(mountPoint, rootConstructor, options) {
+    super(mountPoint, rootConstructor, options)
     this.compsRegister = AppCreator.compsRegister
     this.prevRegLen = this.compsRegister.content.length
     this.$appRoot = AppCreator.$root
@@ -21,8 +21,8 @@ export class CompCreator extends Creator {
     return super.prepare(this.prevRegLen)
   }
 
-  static init(mountPoint, constructor) {
-    return new this(mountPoint, constructor)
+  static init(mountPoint, constructor, options) {
+    return new this(mountPoint, constructor, options)
         .createTemplate()
         .replace()
         .connect()

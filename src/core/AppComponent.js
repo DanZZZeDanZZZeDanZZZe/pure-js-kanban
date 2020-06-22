@@ -3,7 +3,6 @@ import {AppCreator, CompCreator} from './creators'
 
 class AppComponent extends DOMListener {
   classNames = ''
-  html = ''
 
   constructor(options) {
     super(options?.events)
@@ -20,13 +19,16 @@ class AppComponent extends DOMListener {
 
   prepare() {}
 
+  render() {
+    return ''
+  }
+
   destroy() {
     this.removeDOMListeners()
     this.unsubs.forEach(unsub => unsub())
   }
 
   subscribe(eventName, action) {
-    console.log(AppCreator)
     const unsub = AppCreator.singleton.eventManager
         .subscribe(eventName, action)
     this.unsubs.push(unsub)
@@ -41,9 +43,8 @@ class AppComponent extends DOMListener {
     const instance = AppCreator
         .compsRegister
         .findComponent(this.id)
-    console.log(instance)
-    const {$root, constructor} = instance
-    return CompCreator.init($root, constructor)
+    const {$root, constructor, options} = instance
+    return CompCreator.init($root, constructor, options)
   }
 }
 

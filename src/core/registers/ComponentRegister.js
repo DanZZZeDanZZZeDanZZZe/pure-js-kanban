@@ -14,10 +14,8 @@ export class ComponentRegister {
     return this
   }
 
-  add(compInstances) {
-    compInstances.forEach(comp => {
-      this.comps.push(comp)
-    })
+  add(compInstance) {
+    this.comps.push(compInstance)
     return this
   }
 

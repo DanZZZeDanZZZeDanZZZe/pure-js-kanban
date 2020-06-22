@@ -6,57 +6,50 @@ import {AppCreator} from './creators'
 const message = COMPONENT_INSTANCES
 
 class ComponentFactory {
-  constructor(constructors) {
-    this.constructors = constructors
+  constructor(Constructor, options) {
+    this.Constructor = Constructor
+    this.options = options
   }
 
-  constructInstances() {
-    this.componentInstances = this.constructors.map(Constructor => {
-      const instance = new Constructor(this.id)
-      if (!(instance instanceof AppComponent)) {
-        delete this.$components
-        throw new Error(message)
-      }
-
-      instance.id = `${AppCreator.singleton.сompCounter++ || 0}`
-      return instance
-    })
+  constructInstance() {
+    const instance = new this.Constructor(this.options)
+    if (!(instance instanceof AppComponent)) {
+      throw new Error(message)
+    }
+    instance.id = `${AppCreator.singleton.сompCounter++ || 0}`
+    instance.options = this.options
+    this.instance = instance
     return this
   }
 
-  constructComponents() {
-    this.$components = this.componentInstances
-        .map(constructComponent)
+  constructComponent() {
+    const {id, classNames} = this.instance
+    const html = this.instance.render()
+
+    this.$component = $
+        .create('div')
+        .dataset('id', id)
+        .insertClasses(classNames)
+        .inner(html)
     return this
   }
 
   notifyApp() {
-    AppCreator.compsRegister.add(this.componentInstances)
+    AppCreator.compsRegister.add(this.instance)
     return this
   }
 
   getTemplate() {
-    const html = $comp => $comp.html()
-    return this.$components
-        .map(html)
-        .join('')
+    return this.$component.outer()
   }
 }
 
-function constructComponent(obj) {
-  return $
-      .create('div')
-      .dataset('id', obj.id)
-      .insertClasses(obj.classNames)
-      .html(obj.html)
-}
-
-function createComponents(...constructors) {
-  return new ComponentFactory(constructors, )
-      .constructInstances()
-      .constructComponents()
+function createComponent(constructor, options) {
+  return new ComponentFactory(constructor, options)
+      .constructInstance()
+      .constructComponent()
       .notifyApp()
       .getTemplate()
 }
 
-export {createComponents as comp}
+export {createComponent as build}

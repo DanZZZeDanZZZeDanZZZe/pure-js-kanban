@@ -1,16 +1,18 @@
-import {comp} from '../ComponentFactory'
+import {build} from '../ComponentFactory'
 import utils from '../utils'
 
 const {adjustEl} = utils
 
 export class Creator {
-  constructor(mountPoint, rootConstructor) {
+  constructor(mountPoint, rootConstructor, options) {
     this.root = rootConstructor
+    this.options = options
     this.$point = adjustEl(mountPoint)
   }
 
-  createTemplate() {
-    this.template = comp(this.root)
+  createTemplate(options) {
+    console.log(this.options)
+    this.template = build(this.root, this.options)
     return this
   }
 
