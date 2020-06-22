@@ -6,9 +6,10 @@ import {AppCreator} from './creators'
 const message = COMPONENT_INSTANCES
 
 class ComponentFactory {
-  constructor(Constructor, options) {
+  constructor(Constructor, options, id) {
     this.Constructor = Constructor
     this.options = options
+    this.id = id
   }
 
   constructInstance() {
@@ -16,7 +17,7 @@ class ComponentFactory {
     if (!(instance instanceof AppComponent)) {
       throw new Error(message)
     }
-    instance.id = `${AppCreator.singleton.сompCounter++ || 0}`
+    instance.id = this.id || `${AppCreator.singleton.сompCounter++ || 0}`
     instance.options = this.options
     this.instance = instance
     return this
@@ -44,8 +45,8 @@ class ComponentFactory {
   }
 }
 
-function createComponent(constructor, options) {
-  return new ComponentFactory(constructor, options)
+function createComponent(constructor, options, id) {
+  return new ComponentFactory(constructor, options, id)
       .constructInstance()
       .constructComponent()
       .notifyApp()

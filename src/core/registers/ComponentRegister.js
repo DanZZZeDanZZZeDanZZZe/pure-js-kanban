@@ -24,6 +24,11 @@ export class ComponentRegister {
         .filter(comp => comp.id === id)[0]
   }
 
+  deleteComponent(id) {
+    this.comps = this.comps.filter(comp => comp.id !== id)
+    return this
+  }
+
   getConstructor(comp) {
     return this
   }

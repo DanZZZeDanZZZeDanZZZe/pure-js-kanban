@@ -2,10 +2,9 @@ import DOMListener from './DOMListener'
 import {AppCreator, CompCreator} from './creators'
 
 class AppComponent extends DOMListener {
-  classNames = ''
-
   constructor(options) {
     super(options?.events)
+    this.classNames = options?.classNames || ''
     this.unsubs = []
   }
 
@@ -40,11 +39,11 @@ class AppComponent extends DOMListener {
   }
 
   update() {
-    const instance = AppCreator
-        .compsRegister
-        .findComponent(this.id)
-    const {$root, constructor, options} = instance
-    return CompCreator.init($root, constructor, options)
+    const reg = AppCreator.compsRegister
+    const instance = reg.findComponent(this.id)
+    reg.deleteComponent(this.id)
+    const {$root, constructor, options, id} = instance
+    return CompCreator.init($root, constructor, options, id)
   }
 }
 

@@ -11,8 +11,7 @@ export class Creator {
   }
 
   createTemplate(options) {
-    console.log(this.options)
-    this.template = build(this.root, this.options)
+    this.template = build(this.root, this.options, this.id)
     return this
   }
 
