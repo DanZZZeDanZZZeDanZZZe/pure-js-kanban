@@ -1,20 +1,31 @@
-import {AppComponent, comp} from '@core'
+import {AppComponent, build} from '@core'
 import Card from '../card/Card';
 
 class Surface extends AppComponent {
-  classNames = 'surface'
-  html = `<div class="card-holder">
-    ${
-      comp(Card, Card, Card, Card)
-    }
-  </div>`
-
   constructor() {
-    const options = {
-
-    }
-    super(options)
+    super({
+      classNames: 'surface'
+    })
   }
+
+  render() {
+    return `
+    <div class="card-holder">
+      ${cards(4)}
+    </div>
+    `
+  }
+}
+
+function cards(length) {
+  return new Array(length)
+      .fill(null)
+      .map((item, index) => {
+        return build(Card, {
+          title: index
+        })
+      })
+      .join('')
 }
 
 export default Surface

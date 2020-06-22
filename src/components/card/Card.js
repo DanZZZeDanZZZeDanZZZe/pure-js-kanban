@@ -1,30 +1,32 @@
 import {AppComponent} from '@core'
 
 class Card extends AppComponent {
-  constructor() {
-    const options = {
+  constructor(options) {
+    super({
+      classNames: 'card',
       events: ['click']
-    }
-    super(options)
+    })
+    this.title = 'Title ' + options.title
   }
 
-  classNames = 'card'
-  html = `
-    <div class="card-header">
-      <p class="card-title">Title</p>
-    </div>
+  render() {
+    return `
+      <div class="card-header">
+        <p class="card-title">${this.title}</p>
+      </div>
 
-    <div class="task-holder">
-      <div class="tasks">
+      <div class="task-holder">
+        <div class="tasks">
+        </div>
+        <div class="card-control-panel">
+          <button class="add-button">
+            <i class="material-icons">add</i>
+            <p>Add card<p>
+          </button>
+        </div>
       </div>
-      <div class="card-control-panel">
-        <button class="add-button">
-          <i class="material-icons">add</i>
-          <p>Add card<p>
-        </button>
-      </div>
-    </div>
-  `
+    `
+  }
 
   onClick() {
     this.update()
