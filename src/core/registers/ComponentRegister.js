@@ -9,9 +9,7 @@ export class ComponentRegister {
     const connect = comp => {
       return comp.connect($mountPoint)
     }
-    const comps = start ?
-        this.comps.slice(start, end) :
-        this.comps
+    const comps = this.getRange(start, end)
     comps.forEach(connect)
     return this
   }
@@ -24,7 +22,6 @@ export class ComponentRegister {
   }
 
   findComponent(id) {
-    console.log(this.comps)
     return this.comps
         .filter(comp => comp.id === id)[0]
   }
@@ -33,15 +30,17 @@ export class ComponentRegister {
     return this
   }
 
-  hangEvents() {
-    this.comps.forEach(comp => {
+  hangEvents(start, end) {
+    const comps = this.getRange(start, end)
+    comps.forEach(comp => {
       comp.init()
     })
     return this
   }
 
-  prepare() {
-    this.comps.forEach(comp => {
+  prepare(start, end) {
+    const comps = this.getRange(start, end)
+    comps.forEach(comp => {
       comp.prepare()
     })
     return this
@@ -49,6 +48,12 @@ export class ComponentRegister {
 
   get content() {
     return this.comps
+  }
+
+  getRange(start, end) {
+    return start ?
+        this.comps.slice(start, end) :
+        this.comps
   }
 
   defineClass($comp) {}

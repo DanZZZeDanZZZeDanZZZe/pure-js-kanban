@@ -4,22 +4,21 @@ import {AppCreator} from './AppCreator'
 export class CompCreator extends Creator {
   constructor(mountPoint, rootConstructor) {
     super(mountPoint, rootConstructor)
-    this.register = AppCreator.compsRegister
-    this.prevRegLen = this.register.content.length
+    this.compsRegister = AppCreator.compsRegister
+    this.prevRegLen = this.compsRegister.content.length
     this.$appRoot = AppCreator.$root
   }
 
   connect() {
-    this.register.connect(this.$appRoot, this.prevRegLen)
-    return this
+    return super.connect(this.$appRoot, this.prevRegLen)
   }
 
-  static update(id) {
-    const instance = AppCreator
-        .compsRegister
-        .findComponent(id)
-    const {$root, constructor} = instance
-    return this.init($root, constructor)
+  hangEvents() {
+    return super.hangEvents(this.prevRegLen)
+  }
+
+  prepare() {
+    return super.prepare(this.prevRegLen)
   }
 
   static init(mountPoint, constructor) {
@@ -27,6 +26,8 @@ export class CompCreator extends Creator {
         .createTemplate()
         .replace()
         .connect()
+        .hangEvents()
+        .prepare()
   }
 }
 

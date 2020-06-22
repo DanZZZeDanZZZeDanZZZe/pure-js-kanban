@@ -1,5 +1,5 @@
 import DOMListener from './DOMListener'
-import {AppCreator} from './creators'
+import {AppCreator, CompCreator} from './creators'
 
 class AppComponent extends DOMListener {
   classNames = ''
@@ -35,6 +35,15 @@ class AppComponent extends DOMListener {
   notify(eventName, arg) {
     AppCreator.singleton.eventManager
         .notify(eventName, arg)
+  }
+
+  update() {
+    const instance = AppCreator
+        .compsRegister
+        .findComponent(this.id)
+    console.log(instance)
+    const {$root, constructor} = instance
+    return CompCreator.init($root, constructor)
   }
 }
 

@@ -3,7 +3,7 @@ import {AppComponent} from '@core'
 class Card extends AppComponent {
   constructor() {
     const options = {
-
+      events: ['click']
     }
     super(options)
   }
@@ -25,6 +25,10 @@ class Card extends AppComponent {
       </div>
     </div>
   `
+
+  onClick() {
+    this.update()
+  }
 }
 
 export default Card
