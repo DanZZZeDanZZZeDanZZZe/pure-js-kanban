@@ -6,23 +6,34 @@ class AppComponent extends DOMListener {
   html = ''
 
   constructor(options) {
-    const listeners = listeners in options ?
-      options.listeners :
-      []
-    super(options.listeners)
+    super(options?.events)
+    this.unsubs = []
   }
 
   connect($mountPoint) {
     this.connectElement($mountPoint)
   }
 
+  init() {
+    this.initDOMListeners()
+  }
+
+  prepare() {}
+
+  destroy() {
+    this.removeDOMListeners()
+    this.unsubs.forEach(unsub => unsub())
+  }
+
   subscribe(eventName, action) {
-    AppCreator.eventManager
+    console.log(AppCreator)
+    const unsub = AppCreator.singleton.eventManager
         .subscribe(eventName, action)
+    this.unsubs.push(unsub)
   }
 
   notify(eventName, arg) {
-    AppCreator.eventManager
+    AppCreator.singleton.eventManager
         .notify(eventName, arg)
   }
 }

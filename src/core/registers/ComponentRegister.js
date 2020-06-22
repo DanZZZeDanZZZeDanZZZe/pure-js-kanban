@@ -33,6 +33,20 @@ export class ComponentRegister {
     return this
   }
 
+  hangEvents() {
+    this.comps.forEach(comp => {
+      comp.init()
+    })
+    return this
+  }
+
+  prepare() {
+    this.comps.forEach(comp => {
+      comp.prepare()
+    })
+    return this
+  }
+
   get content() {
     return this.comps
   }

@@ -16,6 +16,16 @@ class DOMWrapper {
     throw new Error(STR_HTML_ERROR)
   }
 
+  on(eventName, listener) {
+    this.el.addEventListener(eventName, listener)
+    return this
+  }
+
+  off(eventName, listener) {
+    this.el.removeEventListener(eventName, listener)
+    return this
+  }
+
   html(text, pos) {
     if (text) {
       this.insertHTML(text, pos)

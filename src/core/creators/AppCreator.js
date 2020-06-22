@@ -19,6 +19,16 @@ export class AppCreator extends Creator {
 
   connect() {
     this.compsRegister.connect(this.$point)
+    return this
+  }
+
+  hangEvents() {
+    this.compsRegister.hangEvents()
+    return this
+  }
+
+  prepare() {
+    this.compsRegister.prepare()
   }
 
   static init(mountPoint, constructor) {
@@ -27,6 +37,8 @@ export class AppCreator extends Creator {
         .createTemplate()
         .addTo()
         .connect()
+        .hangEvents()
+        .prepare()
   }
 
   static get compsRegister() {

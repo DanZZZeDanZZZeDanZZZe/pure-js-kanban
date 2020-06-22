@@ -1,7 +1,8 @@
 import {DOMWrapper, $, errorMessages} from '@core'
 
 const {WRAPPER_HTML_ERROR} = errorMessages
-function adjustEl(el) {
+
+export function adjustEl(el) {
   if (el instanceof DOMWrapper) {
     return el
   }
@@ -11,4 +12,10 @@ function adjustEl(el) {
   throw new Error(WRAPPER_HTML_ERROR)
 }
 
-export {adjustEl}
+export function capitalize(string) {
+  if (typeof string !== 'string') {
+    return ''
+  }
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
