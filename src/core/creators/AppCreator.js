@@ -1,14 +1,22 @@
 import {ComponentRegister} from '../registers'
-import {createEventManager} from '../eventManager'
+import {createEventManager} from '../creators'
 import {Creator} from './Creator'
+import {createStore} from './store'
 
 export class AppCreator extends Creator {
   static singleton = null
 
-  constructor(mountPoint, rootConstructor) {
+  constructor(mountPoint, rootConstructor, rootReducer, initalState) {
     super(mountPoint, rootConstructor)
-    this.eventManager = createEventManager()
     this.compsRegister = new ComponentRegister([])
+    this.eventManager = createEventManager()
+
+    if (rootReducer) {
+      this.store = createStore(rootReducer, initalState)
+    } else {
+      throw new Error('No reducer set')
+    }
+
     AppCreator.singleton = this
   }
 
@@ -21,9 +29,9 @@ export class AppCreator extends Creator {
     return super.connect(this.$point)
   }
 
-  static init(mountPoint, constructor, options) {
+  static init(...args) {
     if (this.singleton) return this.singleton
-    return new this(mountPoint, constructor, options)
+    return new this(...args)
         .createTemplate()
         .addTo()
         .connect()
@@ -37,5 +45,9 @@ export class AppCreator extends Creator {
 
   static get $root() {
     return this.singleton.$point
+  }
+
+  static get state() {
+    return this.singleton.store.getState()
   }
 }

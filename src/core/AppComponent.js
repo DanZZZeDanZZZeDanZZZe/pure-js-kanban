@@ -5,7 +5,10 @@ class AppComponent extends DOMListener {
   constructor(options) {
     super(options?.events)
     this.classNames = options?.classNames || ''
+    this.watch = options?.watch || ''
+
     this.unsubs = []
+    this.app = AppCreator.singleton
   }
 
   connect($mountPoint) {
@@ -28,14 +31,22 @@ class AppComponent extends DOMListener {
   }
 
   subscribe(eventName, action) {
-    const unsub = AppCreator.singleton.eventManager
+    const unsub = this.app.eventManager
         .subscribe(eventName, action)
     this.unsubs.push(unsub)
   }
 
   notify(eventName, arg) {
-    AppCreator.singleton.eventManager
+    this.app.eventManager
         .notify(eventName, arg)
+  }
+
+  $subscribe(fn) {
+    this.app.store.subscribe(fn)
+  }
+
+  $dispatch(action) {
+    this.app.store.dispatch(action)
   }
 
   update() {
