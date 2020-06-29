@@ -5,9 +5,10 @@ class AppComponent extends DOMListener {
   constructor(options) {
     super(options?.events)
     this.classNames = options?.classNames || ''
-    this.watch = options?.watch || ''
+    this.watch = options?.watch || []
 
     this.unsubs = []
+
     this.app = AppCreator.singleton
   }
 
@@ -25,18 +26,22 @@ class AppComponent extends DOMListener {
     return ''
   }
 
-  destroy() {
+  get $state() {
+    return this.app.store.getState()
+  }
+
+  $destroy() {
     this.removeDOMListeners()
     this.unsubs.forEach(unsub => unsub())
   }
 
-  subscribe(eventName, action) {
+  $listen(eventName, action) {
     const unsub = this.app.eventManager
         .subscribe(eventName, action)
     this.unsubs.push(unsub)
   }
 
-  notify(eventName, arg) {
+  $notify(eventName, arg) {
     this.app.eventManager
         .notify(eventName, arg)
   }

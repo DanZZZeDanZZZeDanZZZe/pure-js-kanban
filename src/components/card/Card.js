@@ -29,7 +29,7 @@ class Card extends AppComponent {
   }
 
   onClick() {
-    this.update()
+    this.$dispatch({type: 'CLICK'})
   }
 }
 

@@ -1,7 +1,9 @@
+import {StoreSubscriber} from '../StoreSubscriber'
 import {ComponentRegister} from '../registers'
 import {createEventManager} from '../creators'
 import {Creator} from './Creator'
 import {createStore} from './store'
+
 
 export class AppCreator extends Creator {
   static singleton = null
@@ -16,6 +18,9 @@ export class AppCreator extends Creator {
     } else {
       throw new Error('No reducer set')
     }
+
+    this.storeSubscriber = new StoreSubscriber(this.store)
+    this.storeSubscriber.subscribeComponents(this.compsRegister.comps)
 
     AppCreator.singleton = this
   }

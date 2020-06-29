@@ -4,14 +4,15 @@ import Card from '../card/Card';
 class Surface extends AppComponent {
   constructor() {
     super({
-      classNames: 'surface'
+      classNames: 'surface',
+      watch: 'length'
     })
   }
 
   render() {
     return `
     <div class="card-holder">
-      ${cards(4)}
+      ${cards(this.$state.length)}
     </div>
     `
   }

@@ -1,7 +1,6 @@
 import * as errorMessages from '@core/errorMessages'
 import * as utils from '@core/utils'
 import {AppComponent} from '@core/AppComponent'
-import {AppStateComponent} from '@core/AppStateComponent'
 import {build} from '@core/ComponentFactory'
 import DOMListener from '@core/DOMListener'
 import {DOMWrapper, $} from '@core/DOMWrapper'
@@ -15,7 +14,6 @@ import {
 export {
   errorMessages,
   createEventManager,
-  AppStateComponent,
   AppComponent,
   DOMListener,
   DOMWrapper,
