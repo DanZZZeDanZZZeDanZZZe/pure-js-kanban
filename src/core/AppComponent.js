@@ -66,7 +66,7 @@ class AppComponent extends DOMListener {
     const instance = reg.findComponent(this.id)
 
     reg.deleteComponent(this.id)
-    // reg.deleteСomponentСhildren(this.id)
+    reg.deleteСomponentСhildren(this.id)
 
     const {$root, constructor, options, id} = instance
     return CompCreator.init($root, constructor, options, id)
