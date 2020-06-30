@@ -18,7 +18,7 @@ class ComponentFactory {
       throw new Error(message)
     }
     instance.id = this.id || `${AppCreator.singleton.сompCounter++ || 0}`
-    instance.options = this.options
+    instance.parentID = this.parentID || null
     this.instance = instance
     return this
   }
@@ -45,8 +45,8 @@ class ComponentFactory {
   }
 }
 
-function createComponent(constructor, options, id) {
-  return new ComponentFactory(constructor, options, id)
+function createComponent(constructor, options, id, parentID) {
+  return new ComponentFactory(constructor, options, id, parentID)
       .constructInstance()
       .constructComponent()
       .notifyApp()

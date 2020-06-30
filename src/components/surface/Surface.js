@@ -1,4 +1,4 @@
-import {AppComponent, build} from '@core'
+import {AppComponent} from '@core'
 import Card from '../card/Card';
 
 class Surface extends AppComponent {
@@ -12,17 +12,17 @@ class Surface extends AppComponent {
   render() {
     return `
     <div class="card-holder">
-      ${cards(this.$state.length)}
+      ${cards(this.$state.length, this.$build)}
     </div>
     `
   }
 }
 
-function cards(length) {
+function cards(length, b) {
   return new Array(length)
       .fill(null)
       .map((item, index) => {
-        return build(Card, {
+        return b(Card, {
           title: index
         })
       })

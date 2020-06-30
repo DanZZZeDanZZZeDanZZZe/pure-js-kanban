@@ -1,7 +1,6 @@
 import * as errorMessages from '@core/errorMessages'
 import * as utils from '@core/utils'
 import {AppComponent} from '@core/AppComponent'
-import {build} from '@core/ComponentFactory'
 import DOMListener from '@core/DOMListener'
 import {DOMWrapper, $} from '@core/DOMWrapper'
 import {
@@ -21,7 +20,6 @@ export {
   CompCreator,
   createStore,
   utils,
-  build,
   $
 }
 

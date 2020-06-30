@@ -24,8 +24,18 @@ export class ComponentRegister {
         .filter(comp => comp.id === id)[0]
   }
 
+  findChildren(id) {
+    return this.comps
+        .filter(comp => comp.parentID === id)
+  }
+
   deleteComponent(id) {
     this.comps = this.comps.filter(comp => comp.id !== id)
+    return this
+  }
+
+  deleteСomponentСhildren(id) {
+    this.comps = this.comps.filter(comp => comp.parentID !== id)
     return this
   }
 

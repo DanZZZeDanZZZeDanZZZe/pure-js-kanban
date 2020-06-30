@@ -1,13 +1,16 @@
 import DOMListener from './DOMListener'
 import {AppCreator, CompCreator} from './creators'
+import {build} from './ComponentFactory'
+
 
 class AppComponent extends DOMListener {
   constructor(options) {
     super(options?.events)
     this.classNames = options?.classNames || ''
     this.watch = options?.watch || []
-
     this.unsubs = []
+
+    this.$build = this.$build.bind(this)
 
     this.app = AppCreator.singleton
   }
@@ -54,10 +57,17 @@ class AppComponent extends DOMListener {
     this.app.store.dispatch(action)
   }
 
+  $build(constructor, options) {
+    return build(constructor, options, null, this.id)
+  }
+
   update() {
     const reg = AppCreator.compsRegister
     const instance = reg.findComponent(this.id)
+
     reg.deleteComponent(this.id)
+    // reg.deleteСomponentСhildren(this.id)
+
     const {$root, constructor, options, id} = instance
     return CompCreator.init($root, constructor, options, id)
   }
