@@ -29,10 +29,6 @@ export class ComponentRegister {
     return this
   }
 
-  getConstructor(comp) {
-    return this
-  }
-
   hangEvents(start, end) {
     const comps = this.getRange(start, end)
     comps.forEach(comp => {
@@ -58,6 +54,4 @@ export class ComponentRegister {
         this.comps.slice(start, end) :
         this.comps
   }
-
-  defineClass($comp) {}
 }

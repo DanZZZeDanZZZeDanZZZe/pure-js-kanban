@@ -18,9 +18,7 @@ export class StoreSubscriber {
         const changes = findChange(...states)
 
         components.forEach(comp => {
-          console.log('StoreSubscriber -> subscribeComponents -> comp ', comp )
           if (checkChanges(comp, changes)) {
-            console.log('changes', comp, changes)
             comp.update()
           }
         })

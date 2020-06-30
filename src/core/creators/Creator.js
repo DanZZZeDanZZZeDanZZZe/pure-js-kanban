@@ -10,7 +10,7 @@ export class Creator {
     this.$point = adjustEl(mountPoint)
   }
 
-  createTemplate(options) {
+  createTemplate() {
     this.template = build(this.root, this.options, this.id)
     return this
   }
