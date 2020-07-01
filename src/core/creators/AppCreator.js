@@ -1,17 +1,19 @@
 import {StoreSubscriber} from '../StoreSubscriber'
-import {ComponentRegister} from '../registers'
 import {createEventManager} from '../creators'
-import {Creator} from './Creator'
-import {createStore} from './store'
 import {CompnentTree} from '../ComponentTree'
+import {build} from '../ComponentFactory'
+import {createStore} from './store'
+import utils from '../utils'
 
+const {adjustEl} = utils
 
-export class AppCreator extends Creator {
+export class AppCreator {
   static singleton = null
 
   constructor(mountPoint, rootConstructor, rootReducer, initalState) {
-    super(mountPoint, rootConstructor)
-    this.compsRegister = new ComponentRegister([])
+    this.$point = adjustEl(mountPoint)
+    this.root = rootConstructor
+
     this.eventManager = createEventManager()
     this.comps = []
 
@@ -22,22 +24,23 @@ export class AppCreator extends Creator {
     }
 
     this.storeSubscriber = new StoreSubscriber(this.store)
-    this.storeSubscriber.subscribeComponents(this.compsRegister.comps)
+    this.storeSubscriber.subscribeComponents(this.comps)
 
     AppCreator.singleton = this
   }
 
   createTemplate() {
-    this.сompCounter = null
-    return super.createTemplate()
+    this.template = build(this.root, this.options, this.id)
+    return this
+  }
+
+  addTo(position) {
+    this.$point.html(this.template, position)
+    return this
   }
 
   connect() {
-    return super.connect(this.$point)
-  }
-
-  createTree() {
-    this.tree = new CompnentTree(this.comps)
+    this.tree = new CompnentTree(this.comps).connectToHTML(this.$point)
     return this
   }
 
@@ -47,9 +50,6 @@ export class AppCreator extends Creator {
         .createTemplate()
         .addTo()
         .connect()
-        .hangEvents()
-        .createTree()
-        .prepare()
   }
 
   static get compsRegister() {

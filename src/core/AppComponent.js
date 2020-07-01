@@ -1,5 +1,5 @@
 import DOMListener from './DOMListener'
-import {AppCreator, CompCreator} from './creators'
+import {AppCreator} from './creators'
 import {build} from './ComponentFactory'
 
 
@@ -19,8 +19,8 @@ class AppComponent extends DOMListener {
     this.connectElement($mountPoint)
   }
 
-  init() {
-    this.initDOMListeners()
+  init($element) {
+    this.initDOMListeners($element)
   }
 
   prepare() {}
@@ -58,18 +58,11 @@ class AppComponent extends DOMListener {
   }
 
   $build(constructor, options) {
-    return build(constructor, options, null, this)
+    return build(constructor, options, this)
   }
 
   update() {
-    const reg = AppCreator.compsRegister
-    const instance = reg.findComponent(this.id)
-
-    reg.deleteComponent(this.id)
-    reg.deleteСomponentСhildren(this.id)
-
-    const {$root, constructor, options, id} = instance
-    return CompCreator.init($root, constructor, options, id)
+    console.log('AppComponent -> update -> update()')
   }
 }
 

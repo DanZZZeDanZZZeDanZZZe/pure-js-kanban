@@ -6,10 +6,9 @@ import {AppCreator} from './creators'
 const message = COMPONENT_INSTANCES
 
 class ComponentFactory {
-  constructor(Constructor, options, id, parent) {
+  constructor(Constructor, options, parent) {
     this.Constructor = Constructor
     this.options = options
-    this.id = id
     this.parent = parent
   }
 
@@ -18,26 +17,24 @@ class ComponentFactory {
     if (!(instance instanceof AppComponent)) {
       throw new Error(message)
     }
-    instance.id = this.id || `${AppCreator.singleton.сompCounter++ || 0}`
     instance.parent = this.parent || null
     this.instance = instance
     return this
   }
 
   constructComponent() {
-    const {id, classNames} = this.instance
+    const {classNames} = this.instance
     const html = this.instance.render()
 
     this.$component = $
         .create('div')
-        .dataset('id', id)
+        .dataset('type', 'component')
         .insertClasses(classNames)
         .inner(html)
     return this
   }
 
   notifyApp() {
-    AppCreator.compsRegister.add(this.instance)
     AppCreator.singleton.comps.push(this.instance)
     return this
   }
@@ -47,8 +44,8 @@ class ComponentFactory {
   }
 }
 
-function createComponent(constructor, options, id, parent) {
-  return new ComponentFactory(constructor, options, id, parent)
+function createComponent(constructor, options, parent) {
+  return new ComponentFactory(constructor, options, parent)
       .constructInstance()
       .constructComponent()
       .notifyApp()

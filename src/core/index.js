@@ -5,7 +5,6 @@ import DOMListener from '@core/DOMListener'
 import {DOMWrapper, $} from '@core/DOMWrapper'
 import {
   AppCreator,
-  CompCreator,
   createEventManager,
   createStore
 } from '@core/creators'
@@ -17,7 +16,6 @@ export {
   DOMListener,
   DOMWrapper,
   AppCreator as App,
-  CompCreator,
   createStore,
   utils,
   $
