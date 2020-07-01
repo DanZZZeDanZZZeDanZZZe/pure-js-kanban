@@ -58,7 +58,7 @@ class AppComponent extends DOMListener {
   }
 
   $build(constructor, options) {
-    return build(constructor, options, null, this.id)
+    return build(constructor, options, null, this)
   }
 
   update() {

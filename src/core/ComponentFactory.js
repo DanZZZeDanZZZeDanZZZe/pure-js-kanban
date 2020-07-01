@@ -6,10 +6,11 @@ import {AppCreator} from './creators'
 const message = COMPONENT_INSTANCES
 
 class ComponentFactory {
-  constructor(Constructor, options, id) {
+  constructor(Constructor, options, id, parent) {
     this.Constructor = Constructor
     this.options = options
     this.id = id
+    this.parent = parent
   }
 
   constructInstance() {
@@ -18,7 +19,7 @@ class ComponentFactory {
       throw new Error(message)
     }
     instance.id = this.id || `${AppCreator.singleton.сompCounter++ || 0}`
-    instance.parentID = this.parentID || null
+    instance.parent = this.parent || null
     this.instance = instance
     return this
   }
@@ -37,6 +38,7 @@ class ComponentFactory {
 
   notifyApp() {
     AppCreator.compsRegister.add(this.instance)
+    AppCreator.singleton.comps.push(this.instance)
     return this
   }
 
@@ -45,8 +47,8 @@ class ComponentFactory {
   }
 }
 
-function createComponent(constructor, options, id, parentID) {
-  return new ComponentFactory(constructor, options, id, parentID)
+function createComponent(constructor, options, id, parent) {
+  return new ComponentFactory(constructor, options, id, parent)
       .constructInstance()
       .constructComponent()
       .notifyApp()

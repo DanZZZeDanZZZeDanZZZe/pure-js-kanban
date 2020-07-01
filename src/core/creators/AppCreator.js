@@ -3,6 +3,7 @@ import {ComponentRegister} from '../registers'
 import {createEventManager} from '../creators'
 import {Creator} from './Creator'
 import {createStore} from './store'
+import {CompnentTree} from '../ComponentTree'
 
 
 export class AppCreator extends Creator {
@@ -12,6 +13,7 @@ export class AppCreator extends Creator {
     super(mountPoint, rootConstructor)
     this.compsRegister = new ComponentRegister([])
     this.eventManager = createEventManager()
+    this.comps = []
 
     if (rootReducer) {
       this.store = createStore(rootReducer, initalState)
@@ -34,6 +36,11 @@ export class AppCreator extends Creator {
     return super.connect(this.$point)
   }
 
+  createTree() {
+    this.tree = new CompnentTree(this.comps)
+    return this
+  }
+
   static init(...args) {
     if (this.singleton) return this.singleton
     return new this(...args)
@@ -41,6 +48,7 @@ export class AppCreator extends Creator {
         .addTo()
         .connect()
         .hangEvents()
+        .createTree()
         .prepare()
   }
 
