@@ -71,9 +71,21 @@ class DOMWrapper {
     return $(this.el.querySelector(selector))
   }
 
+  findAll(selector) {
+    return Array.prototype.map.call(
+        this.el.querySelectorAll(selector),
+        el => $(el)
+    )
+  }
+
   findData(name, value) {
     return this
         .find(`[data-${name}="${value}"]`)
+  }
+
+  findAllData(name, value) {
+    return this
+        .findAll(`[data-${name}="${value}"]`)
   }
 
   findByDataID(id) {

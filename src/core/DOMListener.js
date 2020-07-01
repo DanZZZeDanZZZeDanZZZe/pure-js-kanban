@@ -1,4 +1,3 @@
-import {COMPONENT_INSTANCES} from './errorMessages'
 import utils from './utils'
 
 const {capitalize} = utils
@@ -8,15 +7,9 @@ class DOMListener {
     this.events = events
   }
 
-  connectElement($mountPoint) {
-    this.$root = $mountPoint.findData('id', this.id)
-    return this
-  }
+  initDOMListeners($element) {
+    if ($element) this.$root = $element
 
-  initDOMListeners() {
-    if (!(this.$root)) {
-      throw new Error(COMPONENT_INSTANCES)
-    }
     this.events.forEach(eventName => {
       const method = getListenerName(eventName)
       if (!this[method]) {
