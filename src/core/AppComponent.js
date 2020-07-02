@@ -6,6 +6,7 @@ import {build} from './ComponentFactory'
 class AppComponent extends DOMListener {
   constructor(options) {
     super(options?.events)
+    this.options = options
     this.classNames = options?.classNames || ''
     this.watch = options?.watch || []
     this.unsubs = []
@@ -62,7 +63,11 @@ class AppComponent extends DOMListener {
   }
 
   update() {
-    console.log('AppComponent -> update -> update()')
+    let {comps, tree} = this.app
+    const template = build(this.constructor, this.options, this.parent)
+    this.$root.outer(template)
+    tree.updateBranch(comps, this)
+    comps = []
   }
 }
 

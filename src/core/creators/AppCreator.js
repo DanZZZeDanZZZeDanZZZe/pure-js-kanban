@@ -30,7 +30,7 @@ export class AppCreator {
   }
 
   createTemplate() {
-    this.template = build(this.root, this.options, this.id)
+    this.template = build(this.root)
     return this
   }
 
@@ -40,7 +40,9 @@ export class AppCreator {
   }
 
   connect() {
-    this.tree = new CompnentTree(this.comps).connectToHTML(this.$point)
+    this.tree = new CompnentTree(this.comps)
+        .connectToHTML(this.$point)
+    this.comps = []
     return this
   }
 

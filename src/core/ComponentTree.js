@@ -1,11 +1,11 @@
 export class CompnentTree {
   constructor(components) {
-    this.components = components
-    this.branches = this.createBranch()
+    this.tree = this.createBranch(components)
   }
 
-  createBranch(component = null) {
-    let comps = this.components
+  createBranch(components, component = null) {
+    let comps = components
+
     return createBranch(component)
 
     function createBranch(component) {
@@ -21,6 +21,7 @@ export class CompnentTree {
           return createBranch(ch)
         })
       }
+
       return {
         component,
         children
@@ -29,17 +30,58 @@ export class CompnentTree {
   }
 
   connectToHTML($root) {
+    this.$root = $root
     const $elements = $root.findAllData('type', 'component')
-    connect(this.branches)
+    connect(this.tree)
 
-    function connect(treeNode) {
+    function connect(branch) {
       const $element = $elements.splice(0, 1)[0]
-      const {children, component} = treeNode
+      const {children, component} = branch
       component.init($element)
 
       if (children.length !== 0) {
         children.forEach(c => connect(c))
       }
     }
+    return this
+  }
+
+  updateBranch(components, oldComponent) {
+    const component = components.find(c => {
+      return !components.includes(c.parent)
+    })
+    const newBranch = this.createBranch(components, component)
+    const oldBranch = this.findBranch(oldComponent)
+    this.replaceBranch(oldBranch, newBranch)
+
+    console.log('CompnentTree -> updateBranch -> this.tree', this.tree)
+    return this
+  }
+
+  findBranch(comp) {
+    const branch = this.tree
+
+    const findBranch = branch => {
+      const {component, children} = branch
+      if (component === comp) {
+        return branch
+      }
+      for (const key of children) {
+        const branch = findBranch(key)
+        if (branch) return branch
+      }
+    }
+
+    return findBranch(branch)
+  }
+
+  replaceBranch(oldBranch, newBranch) {
+    oldBranch.component = newBranch.component
+    oldBranch.children = newBranch.children
+    return this
+  }
+
+  getState() {
+    return this.tree
   }
 }

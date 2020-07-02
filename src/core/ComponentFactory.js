@@ -44,8 +44,8 @@ class ComponentFactory {
   }
 }
 
-function createComponent(constructor, options, parent) {
-  return new ComponentFactory(constructor, options, parent)
+function createComponent(...args) {
+  return new ComponentFactory(...args)
       .constructInstance()
       .constructComponent()
       .notifyApp()
