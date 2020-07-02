@@ -29,10 +29,12 @@ export class CompnentTree {
     }
   }
 
-  connectToHTML($root) {
-    this.$root = $root
-    const $elements = $root.findAllData('type', 'component')
-    connect(this.tree)
+  connectToHTML($root, branch = this.tree) {
+    let $elements = $root.findAllData('type', 'component')
+    if ($root.dataset()['type'] === 'component') {
+      $elements = [$root, ...$elements]
+    }
+    connect(branch)
 
     function connect(branch) {
       const $element = $elements.splice(0, 1)[0]
@@ -46,14 +48,15 @@ export class CompnentTree {
     return this
   }
 
-  updateBranch(components, oldComponent) {
+  updateBranch($updatePoint, components, oldComponent) {
     const component = components.find(c => {
       return !components.includes(c.parent)
     })
     const newBranch = this.createBranch(components, component)
     const oldBranch = this.findBranch(oldComponent)
-    this.replaceBranch(oldBranch, newBranch)
 
+    this.replaceBranch(oldBranch, newBranch)
+    this.connectToHTML($updatePoint, oldBranch)
     console.log('CompnentTree -> updateBranch -> this.tree', this.tree)
     return this
   }

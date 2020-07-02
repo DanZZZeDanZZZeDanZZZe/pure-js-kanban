@@ -45,11 +45,6 @@ class DOMWrapper {
     this.el.append($el.el)
   }
 
-  get parent() {
-    const node = $(this.el.parentNode)
-    return node
-  }
-
   insertClasses(classNames) {
     if (typeof classNames === 'string') {
       classNames = classNames.trim().split(' ')
@@ -64,8 +59,9 @@ class DOMWrapper {
   dataset(name, value) {
     if (name && value) {
       this.el.dataset[name] = value
+      return this
     }
-    return this
+    return this.el.dataset
   }
 
   find(selector) {
@@ -107,6 +103,36 @@ class DOMWrapper {
       return this
     }
     return this.el.innerHTML
+  }
+
+  get parent() {
+    return $(this.el.parentNode)
+  }
+
+  get first() {
+    return $(this.el.firstChild)
+  }
+
+  get last() {
+    return $(this.el.lastChild)
+  }
+
+  get previous() {
+    const p = this.el.previousElementSibling
+    return p !== null ? $(p) : null
+  }
+
+  get next() {
+    const n = this.el.nextElementSibling
+    return n !== null ? $(n) : null
+  }
+
+  get predecessor() {
+    let p = this.el.previous
+    if (p === null) {
+      p = this.el.parent
+    }
+    return p
   }
 }
 

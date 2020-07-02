@@ -7,19 +7,21 @@ export class StoreSubscriber {
     this.store = store
   }
 
-  subscribeComponents(components) {
+  subscribeComponents(componentTree) {
     const prevState = this.store.getState()
 
     this.sub = this.store.subscribe(state => {
       const states = [prevState, state]
       if (!(isEqual(...states))) {
         const changes = findChange(...states)
-
-        components.forEach(comp => {
-          if (checkChanges(comp, changes)) {
-            comp.update()
+        const updateComponents = branch => {
+          const {component, children} = branch
+          if (checkChanges(component, changes)) {
+            component.update()
           }
-        })
+          children.forEach(c => updateComponents(c))
+        }
+        updateComponents(componentTree.getState())
       }
     })
     this.prevState = prevState

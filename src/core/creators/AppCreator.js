@@ -21,9 +21,6 @@ export class AppCreator {
       throw new Error('No reducer set')
     }
 
-    this.storeSubscriber = new StoreSubscriber(this.store)
-    this.storeSubscriber.subscribeComponents(this.comps)
-
     AppCreator.singleton = this
   }
 
@@ -40,7 +37,14 @@ export class AppCreator {
   connect() {
     this.tree = new CompnentTree(this.comps)
         .connectToHTML(this.$point)
+    console.log('AppCreator -> connect -> this.tree ', this.tree )
     this.comps = []
+    return this
+  }
+
+  subscribe() {
+    this.storeSubscriber = new StoreSubscriber(this.store)
+    this.storeSubscriber.subscribeComponents(this.tree)
     return this
   }
 
@@ -50,6 +54,7 @@ export class AppCreator {
         .createTemplate()
         .addTo()
         .connect()
+        .subscribe()
   }
 
   static get compsRegister() {

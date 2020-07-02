@@ -63,12 +63,24 @@ class AppComponent extends DOMListener {
   }
 
   update() {
-    let {comps, tree} = this.app
+    const way = makeAWay(this.$root)
     const template = build(this.constructor, this.options, this.parent)
     this.$root.outer(template)
-    tree.updateBranch(comps, this)
-    comps = []
+
+    const $updatePoint = way()
+
+    this.app.tree.updateBranch($updatePoint, this.app.comps, this)
+    this.app.comps = []
   }
+}
+
+function makeAWay($el) {
+  let ancestor = $el.previous
+  if (ancestor === null) {
+    ancestor = $el.parent
+    return () => ancestor.first
+  }
+  return () => ancestor.next
 }
 
 export {AppComponent}
