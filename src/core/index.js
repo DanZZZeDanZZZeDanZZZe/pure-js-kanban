@@ -1,5 +1,9 @@
 import * as errorMessages from '@core/errorMessages'
-import * as utils from '@core/utils'
+import {
+  adjustEl,
+  capitalize,
+  isEqual
+} from '@core/utils'
 import {AppComponent} from '@core/AppComponent'
 import DOMListener from '@core/DOMListener'
 import {DOMWrapper, $} from '@core/DOMWrapper'
@@ -17,7 +21,9 @@ export {
   DOMWrapper,
   AppCreator as App,
   createStore,
-  utils,
+  adjustEl,
+  capitalize,
+  isEqual,
   $
 }
 

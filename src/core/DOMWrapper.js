@@ -1,7 +1,8 @@
-import {errorMessages, utils} from '@core'
+import {errorMessages} from '@core'
+import {adjustEl} from './utils'
 
 const {STR_HTML_ERROR, STR_ARR_ERROR} = errorMessages
-const {adjustEl} = utils
+
 
 class DOMWrapper {
   constructor(el) {

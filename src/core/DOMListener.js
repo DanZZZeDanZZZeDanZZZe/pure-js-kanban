@@ -1,6 +1,4 @@
-import utils from './utils'
-
-const {capitalize} = utils
+import {capitalize} from './utils'
 
 class DOMListener {
   constructor(events = []) {

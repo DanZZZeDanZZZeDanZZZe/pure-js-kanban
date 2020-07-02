@@ -3,9 +3,7 @@ import {createEventManager} from '../creators'
 import {CompnentTree} from '../ComponentTree'
 import {build} from '../ComponentFactory'
 import {createStore} from './store'
-import utils from '../utils'
-
-const {adjustEl} = utils
+import {adjustEl} from '../utils'
 
 export class AppCreator {
   static singleton = null

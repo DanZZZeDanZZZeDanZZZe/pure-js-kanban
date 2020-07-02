@@ -1,6 +1,4 @@
-import utils from './utils'
-
-const {isEqual} = utils
+import {isEqual} from './utils'
 
 export class StoreSubscriber {
   constructor(store) {
