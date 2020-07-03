@@ -1,7 +1,8 @@
-import {errorMessages, utils} from '@core'
+import {errorMessages} from '@core'
+import {adjustEl} from './utils'
 
 const {STR_HTML_ERROR, STR_ARR_ERROR} = errorMessages
-const {adjustEl} = utils
+
 
 class DOMWrapper {
   constructor(el) {
@@ -44,11 +45,6 @@ class DOMWrapper {
     this.el.append($el.el)
   }
 
-  get parent() {
-    const node = $(this.el.parentNode)
-    return node
-  }
-
   insertClasses(classNames) {
     if (typeof classNames === 'string') {
       classNames = classNames.trim().split(' ')
@@ -63,17 +59,30 @@ class DOMWrapper {
   dataset(name, value) {
     if (name && value) {
       this.el.dataset[name] = value
+      return this
     }
-    return this
+    return this.el.dataset
   }
 
   find(selector) {
     return $(this.el.querySelector(selector))
   }
 
+  findAll(selector) {
+    return Array.prototype.map.call(
+        this.el.querySelectorAll(selector),
+        el => $(el)
+    )
+  }
+
   findData(name, value) {
     return this
         .find(`[data-${name}="${value}"]`)
+  }
+
+  findAllData(name, value) {
+    return this
+        .findAll(`[data-${name}="${value}"]`)
   }
 
   findByDataID(id) {
@@ -94,6 +103,36 @@ class DOMWrapper {
       return this
     }
     return this.el.innerHTML
+  }
+
+  get parent() {
+    return $(this.el.parentNode)
+  }
+
+  get first() {
+    return $(this.el.firstChild)
+  }
+
+  get last() {
+    return $(this.el.lastChild)
+  }
+
+  get previous() {
+    const p = this.el.previousElementSibling
+    return p !== null ? $(p) : null
+  }
+
+  get next() {
+    const n = this.el.nextElementSibling
+    return n !== null ? $(n) : null
+  }
+
+  get predecessor() {
+    let p = this.el.previous
+    if (p === null) {
+      p = this.el.parent
+    }
+    return p
   }
 }
 

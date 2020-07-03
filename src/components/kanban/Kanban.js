@@ -1,4 +1,4 @@
-import {AppComponent, build} from '@core'
+import {AppComponent} from '@core'
 
 import Header from '../header/Header';
 import Surface from '../surface/Surface';
@@ -12,10 +12,12 @@ class Kanban extends AppComponent {
   }
 
   render() {
+    const b = this.$build
+
     return `
-      ${build(Header)}
-      ${build(Surface)}
-      ${build(Footer)}
+      ${b(Header)}
+      ${b(Surface)}
+      ${b(Footer)}
     `
   }
 }

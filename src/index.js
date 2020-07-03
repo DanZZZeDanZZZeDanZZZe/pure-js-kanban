@@ -1,8 +1,12 @@
 import './scss/index.scss'
 import Kanban from './components/kanban/Kanban'
-import {AppCreator} from '@/core'
+import {App} from '@/core'
+import {rootReducer} from './state/rootReducer'
+import {defaultState} from './state/defaultState'
 
-AppCreator.init(
+App.init(
     document.getElementById('app'),
-    Kanban
+    Kanban,
+    rootReducer,
+    defaultState
 )

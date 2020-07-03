@@ -1,11 +1,18 @@
 import * as errorMessages from '@core/errorMessages'
-import * as utils from '@core/utils'
+import {
+  adjustEl,
+  capitalize,
+  isEqual,
+  compose
+} from '@core/utils'
 import {AppComponent} from '@core/AppComponent'
-import {build} from '@core/ComponentFactory'
 import DOMListener from '@core/DOMListener'
 import {DOMWrapper, $} from '@core/DOMWrapper'
-import {createEventManager} from '@core/eventManager'
-import {AppCreator, CompCreator} from '@core/creators'
+import {
+  AppCreator,
+  createEventManager,
+  createStore
+} from '@core/creators'
 
 export {
   errorMessages,
@@ -13,10 +20,12 @@ export {
   AppComponent,
   DOMListener,
   DOMWrapper,
-  AppCreator,
-  CompCreator,
-  utils,
-  build,
+  AppCreator as App,
+  createStore,
+  adjustEl,
+  capitalize,
+  isEqual,
+  compose,
   $
 }
 

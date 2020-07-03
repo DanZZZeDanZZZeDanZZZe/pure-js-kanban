@@ -1,27 +1,28 @@
-import {AppComponent, build} from '@core'
+import {AppComponent} from '@core'
 import Card from '../card/Card';
 
 class Surface extends AppComponent {
   constructor() {
     super({
-      classNames: 'surface'
+      classNames: 'surface',
+      watch: 'length'
     })
   }
 
   render() {
     return `
     <div class="card-holder">
-      ${cards(4)}
+      ${cards(this.$state.length, this.$build)}
     </div>
     `
   }
 }
 
-function cards(length) {
+function cards(length, b) {
   return new Array(length)
       .fill(null)
       .map((item, index) => {
-        return build(Card, {
+        return b(Card, {
           title: index
         })
       })
