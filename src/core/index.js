@@ -2,7 +2,8 @@ import * as errorMessages from '@core/errorMessages'
 import {
   adjustEl,
   capitalize,
-  isEqual
+  isEqual,
+  compose
 } from '@core/utils'
 import {AppComponent} from '@core/AppComponent'
 import DOMListener from '@core/DOMListener'
@@ -24,6 +25,7 @@ export {
   adjustEl,
   capitalize,
   isEqual,
+  compose,
   $
 }
 

@@ -57,7 +57,6 @@ export class CompnentTree {
 
     this.replaceBranch(oldBranch, newBranch)
     this.connectToHTML($updatePoint, oldBranch)
-    console.log('CompnentTree -> updateBranch -> this.tree', this.tree)
     return this
   }
 
