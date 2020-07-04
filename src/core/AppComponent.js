@@ -1,6 +1,7 @@
 import DOMListener from './DOMListener'
 import {AppCreator} from './creators'
 import {build} from './ComponentFactory'
+import {$} from '.'
 
 
 class AppComponent extends DOMListener {
@@ -71,6 +72,10 @@ class AppComponent extends DOMListener {
 
     this.app.tree.updateBranch($updatePoint, this.app.comps, this)
     this.app.comps = []
+  }
+
+  $calledOut(value, event) {
+    return !!$(event.target).closestData('type', value)
   }
 }
 

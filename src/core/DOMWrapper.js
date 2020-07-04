@@ -75,6 +75,16 @@ class DOMWrapper {
     )
   }
 
+  closest(selector) {
+    if (!this.el.closest(selector)) return null
+    return $(this.el.closest(selector))
+  }
+
+  closestData(name, value) {
+    return $(this.el)
+        .closest(`[data-${name}="${value}"]`)
+  }
+
   findData(name, value) {
     return this
         .find(`[data-${name}="${value}"]`)
