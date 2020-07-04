@@ -10,11 +10,7 @@ class Surface extends AppComponent {
   }
 
   render() {
-    return `
-    <div class="card-holder">
-      ${cards(this.$state.length, this.$build)}
-    </div>
-    `
+    return cards(this.$state.length, this.$build)
   }
 }
 

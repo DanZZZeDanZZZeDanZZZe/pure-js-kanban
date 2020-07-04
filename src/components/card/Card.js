@@ -15,15 +15,14 @@ class Card extends AppComponent {
         <p class="card-title">${this.title}</p>
       </div>
 
-      <div class="task-holder">
-        <div class="tasks">
-        </div>
+      <div class="content">
+        <div class="task">AA AAA AA</div>
+        <div class="task">AA AAA AA</div>
         <div class="card-control-panel">
-          <button class="add-button">
-            <i class="material-icons">add</i>
-            <p>Add card<p>
-          </button>
-        </div>
+        <button class="add-button">
+          <i class="material-icons">add</i>
+          <p>Add card<p>
+        </button>
       </div>
     `
   }

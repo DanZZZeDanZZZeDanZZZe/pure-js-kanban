@@ -1,18 +1,13 @@
 .card {
-  width: 20%; 
-  min-width: 300px;
-
-  max-height: 90%;
-  min-height: 150px;
-
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
 
-  padding: 3px 0 3px 9px;
-  background: $card-color;
-  box-shadow: 12px 13px 0px -5px rgba(0,0,0,0.24);
-  color: black;
+  max-height: 90%;
+  width: 20%; 
+  min-width: 300px;
   margin-left: 5%;
+  color: black;
 
   &:last-child  {
     margin-right: 5%
@@ -20,6 +15,9 @@
 
   &-header {
     height: $card-header-height;
+    padding: 5px 0 0 5px;
+    
+    background: $card-color;
 
     .card-title {
       font-size: 1.3rem;
@@ -27,29 +25,27 @@
     } 
   }
 
-  .task-holder {
-    flex-grow: 1;
-    overflow-y: auto;
+  .content {
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 
-    .tasks {
-      .task {
-        margin-top: 10px;
-        padding-left: 5px;
-        margin-bottom: 2px;
-        height: $task-height;
-        font-size: 1.05rem;
-        border-bottom: 2px solid white;
-        margin-right: 9px;
-        display: flex;
-        align-items: flex-end;
-      }
-      flex-grow: 1;
+    background: $card-color;
+
+    .task {
+      margin-top: 10px;
+      padding-left: 5px;
+      margin-bottom: 2px;
+      height: 30px;
+      font-size: 1.05rem;
+      border-bottom: 2px solid white;
+      margin-right: 9px;
+      display: flex;
+      align-items: flex-end;
     }
     .card-control-panel {
       height: 30px;
-
+  
       button {
         @include button(white);
         font-weight: bold;
@@ -63,17 +59,13 @@
 
 @mixin mobile-card {
   .card {
-    display: block;
     width: 90%;
     margin: 20px auto;
     max-height: none;
-  
+    min-width: 150px;
+
     &-title {
       font-size: 1rem;
-    }
-
-    .task-holder {
-      min-height: $card-min-height - $card-header-height;
     }
     
     button {
