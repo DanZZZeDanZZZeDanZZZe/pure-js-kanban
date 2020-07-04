@@ -1,4 +1,23 @@
 .card {
+  width: 20%; 
+  min-width: 300px;
+
+  max-height: 90%;
+  min-height: 150px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 3px 0 3px 9px;
+  background: $card-color;
+  box-shadow: 12px 13px 0px -5px rgba(0,0,0,0.24);
+  color: black;
+  margin-left: 5%;
+
+  &:last-child  {
+    margin-right: 5%
+  }
+
   &-header {
     height: $card-header-height;
 
@@ -40,25 +59,15 @@
       }
     }
   }
-
-  width: $card-width; 
-  min-width: $card-min-width;
-
-  max-height: 90%;
-  min-height: 150px;
-
-  display: flex;
-  flex-direction: column;
-
-  padding: 3px 0 3px 9px;
-  background: $card-color;
-  box-shadow: 12px 13px 0px -5px rgba(0,0,0,0.24);
-  color: black;
-  margin: 0 2%;
 }
 
 @mixin mobile-card {
   .card {
+    display: block;
+    width: 90%;
+    margin: 20px auto;
+    max-height: none;
+  
     &-title {
       font-size: 1rem;
     }
@@ -66,10 +75,10 @@
     .task-holder {
       min-height: $card-min-height - $card-header-height;
     }
-
-    display: block;
-    width: 90%;
-    margin: 20px auto;
-    max-height: none;
+    
+    button {
+      font-size: 1;
+      margin-left: auto;
+    }
   }
 }
