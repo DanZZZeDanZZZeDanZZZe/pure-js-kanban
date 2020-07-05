@@ -11,7 +11,6 @@ class AppComponent extends DOMListener {
     this.classNames = options?.classNames || ''
     this.watch = options?.watch || []
     this.unsubs = []
-
     this.$build = this.$build.bind(this)
 
     this.app = AppCreator.singleton
@@ -31,7 +30,19 @@ class AppComponent extends DOMListener {
     return ''
   }
 
-  get $state() {
+  $setState(state, $prevState) {
+    this.$state = $prevState ?
+        {...$prevState} :
+        {}
+    Object.keys(state).forEach(key => {
+      const value = state[key]
+      if (value !== undefined) {
+        this.$state[key] = value
+      }
+    })
+  }
+
+  get $appState() {
     return this.app.store.getState()
   }
 
@@ -65,7 +76,12 @@ class AppComponent extends DOMListener {
 
   update() {
     const way = makeAWay(this.$root)
-    const template = build(this.constructor, this.options, this.parent)
+    const template = build(
+        this.constructor,
+        this.options,
+        this.parent,
+        this.$state
+    )
     this.$root.outer(template)
 
     const $updatePoint = way()

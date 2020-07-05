@@ -6,8 +6,8 @@ import {compose} from './utils'
 
 const message = COMPONENT_INSTANCES
 
-function createInstance(Constructor, options, parent) {
-  const instance = new Constructor(options)
+function createInstance(Constructor, options, parent, prevState) {
+  const instance = new Constructor(options, prevState || {})
   if (!(instance instanceof AppComponent)) {
     throw new Error(message)
   }
