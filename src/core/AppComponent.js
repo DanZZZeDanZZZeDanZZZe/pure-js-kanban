@@ -74,21 +74,21 @@ class AppComponent extends DOMListener {
     return build(constructor, options, this)
   }
 
-  update() {
+  $update(newOptions = {}) {
+    this.$destroy()
     const way = makeAWay(this.$root)
     const template = build(
         this.constructor,
-        this.options,
+        {...this.options, ...newOptions},
         this.parent,
-        this.$state
+        this.$state,
     )
     this.$root.outer(template)
-
     const $updatePoint = way()
-
     this.app.tree.updateBranch($updatePoint, this.app.comps, this)
     this.app.comps = []
   }
+
 
   $calledOut(value, event) {
     return !!$(event.target).closestData('type', value)
