@@ -26,6 +26,10 @@ function isEqual(a, b) {
   return a === b
 }
 
+function copyFields(obj) {
+  return JSON.parse(JSON.stringify(obj))
+}
+
 function compose(...funcs) {
   if (funcs.length === 0) {
     return (arg) => arg
@@ -42,5 +46,6 @@ export {
   adjustEl,
   capitalize,
   isEqual,
-  compose
+  compose,
+  copyFields
 }

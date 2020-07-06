@@ -1,17 +1,16 @@
-import {isEqual} from './utils'
+import {isEqual, copyFields} from './utils'
 
 export class StoreSubscriber {
   constructor(store) {
     this.sub = null
-    this.prevState = {}
     this.store = store
   }
 
   subscribeComponents(componentTree) {
-    const prevState = this.store.getState()
+    let prevState = {}
 
-    this.sub = this.store.subscribe(state => {
-      const states = [prevState, state]
+    this.sub = this.store.subscribe(newState => {
+      const states = [prevState, newState]
       if (!(isEqual(...states))) {
         const changes = findChange(...states)
         const updateComponents = branch => {
@@ -23,8 +22,8 @@ export class StoreSubscriber {
         }
         updateComponents(componentTree.getState())
       }
+      prevState = copyFields(newState)
     })
-    this.prevState = prevState
   }
 
   unsubscribeFromStore() {
