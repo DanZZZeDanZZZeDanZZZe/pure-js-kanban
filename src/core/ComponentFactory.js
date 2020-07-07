@@ -12,6 +12,7 @@ function createInstance(Constructor, options, parent, prevState) {
     throw new Error(message)
   }
   instance.parent = parent || null
+  instance.passedOptions = options
   return instance
 }
 

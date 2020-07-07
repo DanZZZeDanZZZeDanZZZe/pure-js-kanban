@@ -7,7 +7,6 @@ import {$} from '.'
 class AppComponent extends DOMListener {
   constructor(options) {
     super(options?.events)
-    this.options = options
     this.classNames = options?.classNames || ''
     this.watch = options?.watch || []
     this.unsubs = []
@@ -75,11 +74,12 @@ class AppComponent extends DOMListener {
   }
 
   $update(newOptions = {}) {
+    console.log('$update -> this.passedOptions', this.passedOptions)
     this.$destroy()
     const way = makeAWay(this.$root)
     const template = build(
         this.constructor,
-        {...this.options, ...newOptions},
+        {...this.passedOptions, ...newOptions},
         this.parent,
         this.$state,
     )
