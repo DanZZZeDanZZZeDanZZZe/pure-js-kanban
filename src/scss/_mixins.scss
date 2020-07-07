@@ -20,6 +20,14 @@
   &:hover {
     background: rgba(238, 238, 238, 0.548);
     cursor: pointer;
+    &:disabled {
+      background: inherit;
+      cursor: default;
+    }
+  }
+
+  &:disabled {
+    color: grey
   }
 }
 

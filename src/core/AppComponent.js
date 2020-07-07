@@ -74,7 +74,6 @@ class AppComponent extends DOMListener {
   }
 
   $update(newOptions = {}) {
-    console.log('$update -> this.passedOptions', this.passedOptions)
     this.$destroy()
     const way = makeAWay(this.$root)
     const template = build(

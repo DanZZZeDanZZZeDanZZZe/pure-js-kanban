@@ -10,19 +10,20 @@ class Surface extends AppComponent {
   }
 
   render() {
-    return cards(this.$state.length, this.$build)
+    const {$appState, $build} = this
+    const {cards} = $appState
+    return createCards(cards, $build)
   }
 }
 
-function cards(length, b) {
-  return new Array(length)
-      .fill(null)
-      .map((item, index) => {
-        return b(Card, {
-          title: index
-        })
-      })
-      .join('')
+function createCards(cards, $build) {
+  return cards.map((card, index) => {
+    const {title} = card
+    return $build(Card, {
+      title,
+      index
+    })
+  }).join('')
 }
 
 export default Surface
