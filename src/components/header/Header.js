@@ -1,10 +1,10 @@
 import {AppComponent} from '@core'
 
 class Header extends AppComponent {
-  classNames = 'header'
   constructor() {
     const options = {
-
+      classNames: 'header',
+      tagName: 'header'
     }
     super(options)
   }

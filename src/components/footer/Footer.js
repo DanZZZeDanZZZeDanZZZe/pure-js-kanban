@@ -4,6 +4,7 @@ class Footer extends AppComponent {
   constructor() {
     super({
       classNames: 'footer',
+      tagName: 'footer',
       watch: ['cards']
     })
 
