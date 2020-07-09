@@ -30,6 +30,14 @@ function copyFields(obj) {
   return JSON.parse(JSON.stringify(obj))
 }
 
+function storage(key, value) {
+  if (value) {
+    localStorage.setItem(key, JSON.stringify(value))
+  } else {
+    return JSON.parse(localStorage.getItem(key))
+  }
+}
+
 function compose(...funcs) {
   if (funcs.length === 0) {
     return (arg) => arg
@@ -47,5 +55,6 @@ export {
   capitalize,
   isEqual,
   compose,
-  copyFields
+  copyFields,
+  storage
 }
