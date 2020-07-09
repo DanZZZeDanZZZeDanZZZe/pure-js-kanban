@@ -22,11 +22,11 @@ function notifyApp(instance) {
 }
 
 function getHTML(instance) {
-  const {classNames} = instance
+  const {classNames, tagName} = instance
   const html = instance.render()
 
   return $
-      .create('div')
+      .create(tagName)
       .dataset('type', 'component')
       .insertClasses(classNames)
       .inner(html)

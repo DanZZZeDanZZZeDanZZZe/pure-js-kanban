@@ -9,6 +9,7 @@ class AppComponent extends DOMListener {
     super(options?.events)
     this.classNames = options?.classNames || ''
     this.watch = options?.watch || []
+    this.tagName = options?.tagName || 'div'
     this.unsubs = []
     this.$build = this.$build.bind(this)
 
