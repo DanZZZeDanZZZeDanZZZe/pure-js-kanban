@@ -4,9 +4,14 @@ class Header extends AppComponent {
   constructor() {
     const options = {
       classNames: 'header',
-      tagName: 'header'
+      tagName: 'header',
+      events: ['click']
     }
     super(options)
+  }
+
+  onClick() {
+    this.$notify('surface: lose focus')
   }
 
   render() {

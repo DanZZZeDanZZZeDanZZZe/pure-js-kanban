@@ -5,7 +5,8 @@ class Footer extends AppComponent {
     super({
       classNames: 'footer',
       tagName: 'footer',
-      watch: ['cards']
+      watch: ['cards'],
+      events: ['click']
     })
 
     const {cards} = this.$appState
@@ -17,6 +18,10 @@ class Footer extends AppComponent {
           return count + card.tasks.length
         }, 0)
     this.finishedTasks = cards[last].tasks.length
+  }
+
+  onClick() {
+    this.$notify('surface: lose focus')
   }
 
   render() {

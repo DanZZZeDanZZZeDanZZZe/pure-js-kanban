@@ -1,18 +1,33 @@
 import {AppComponent} from '@core'
 import Card from '../card/Card';
+import {deactivateСards} from '@/state/actionCreators';
 
 class Surface extends AppComponent {
   constructor() {
     super({
       classNames: 'surface',
-      watch: 'length'
+      tagName: 'main',
+      watch: 'length',
+      events: ['keydown']
     })
+  }
+
+  onKeydown() {
+    if (event.key === 'Escape') {
+      this.$dispatch(deactivateСards())
+    }
   }
 
   render() {
     const {$appState, $build} = this
     const {cards} = $appState
     return createCards(cards, $build)
+  }
+
+  prepare() {
+    this.$listen('surface: lose focus', () => {
+      this.$dispatch(deactivateСards())
+    })
   }
 }
 
