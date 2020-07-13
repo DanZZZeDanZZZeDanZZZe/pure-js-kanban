@@ -23,8 +23,13 @@ class TaskInput extends AppComponent {
 
   render() {
     return `${
-      '<input type="text"/> '
+      '<input type="text" data-type="task-input"/> '
     }`
+  }
+
+  prepare() {
+    this.$extract('task-input').focus()
+    console.log('TaskInput -> prepare ->', this.$extract('task-input'))
   }
 }
 
