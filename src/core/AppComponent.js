@@ -18,10 +18,12 @@ class AppComponent extends DOMListener {
 
   connect($mountPoint) {
     this.connectElement($mountPoint)
+    return this
   }
 
   init($element) {
     this.initDOMListeners($element)
+    return this
   }
 
   prepare() {}
@@ -92,6 +94,14 @@ class AppComponent extends DOMListener {
 
   $calledOut(value, event) {
     return !!$(event.target).closestData('type', value)
+  }
+
+  $extract(value) {
+    return this.$root.findData('type', value)
+  }
+
+  $extractAll(value) {
+    return this.$root.findAllData('type', value)
   }
 }
 

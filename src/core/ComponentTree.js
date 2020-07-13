@@ -39,8 +39,7 @@ export class CompnentTree {
     function connect(branch) {
       const $element = $elements.splice(0, 1)[0]
       const {children, component} = branch
-      component.init($element)
-
+      component.init($element).prepare()
       if (children.length !== 0) {
         children.forEach(c => connect(c))
       }

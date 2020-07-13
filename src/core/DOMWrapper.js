@@ -45,6 +45,10 @@ class DOMWrapper {
     this.el.append($el.el)
   }
 
+  get classList() {
+    return this.el.classList
+  }
+
   insertClasses(classNames) {
     if (typeof classNames === 'string') {
       classNames = classNames.trim().split(' ')
@@ -113,6 +117,10 @@ class DOMWrapper {
       return this
     }
     return this.el.innerHTML
+  }
+
+  focus() {
+    this.el.focus()
   }
 
   get parent() {
