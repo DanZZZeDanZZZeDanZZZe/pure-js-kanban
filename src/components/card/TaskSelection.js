@@ -26,7 +26,16 @@ class TaskSelection extends AppComponent {
 
 function createTasks(tasks) {
   return tasks
-      .map(task => `<div class="task to-choose" data-type="task">${task}</div>`)
+      .map(task => {
+        return `
+          <div 
+            class="task to-choose" 
+            data-type="task"
+          >
+          ${task.title}
+          </div>
+        `
+      })
       .join('')
 }
 

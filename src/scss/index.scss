@@ -9,6 +9,7 @@
 @import "task-input";
 @import "task-selection";
 @import "footer";
+@import "./modal-window/modal-window.scss";
 
 * {
   margin: 0;
@@ -33,12 +34,14 @@ body {
   top: 0;
 }
 
-@media screen and (
-    $media-screen-param: 
-    $media-param-value
-) {
+@media (min-width: 450px) {
+  @include desktop-modal-window;
+}
+
+@media (max-width: 450px) {
   @include mobile-header;
   @include mobile-surface;
   @include mobile-card;
   @include mobile-footer;
+  @include mobile-modal-window;
 }

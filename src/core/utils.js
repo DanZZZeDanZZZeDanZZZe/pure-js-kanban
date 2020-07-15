@@ -50,11 +50,16 @@ function compose(...funcs) {
   return funcs.reduce((a, b) => (...args) => a(b(...args)))
 }
 
+function normalize(str) {
+  return str.trim().toLowerCase()
+}
+
 export {
   adjustEl,
   capitalize,
   isEqual,
   compose,
   copyFields,
-  storage
+  storage,
+  normalize
 }

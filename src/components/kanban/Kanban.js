@@ -3,21 +3,23 @@ import {AppComponent} from '@core'
 import Header from '../header/Header';
 import Surface from '../surface/Surface';
 import Footer from '../footer/Footer';
+import ModalWindow from '../modal-window/ModalWindow';
 
 class Kanban extends AppComponent {
   constructor() {
     super({
-      classNames: 'kanban'
+      classNames: 'kanban',
     })
   }
 
   render() {
-    const b = this.$build
+    const {$build, $appState} = this
 
     return `
-      ${b(Header)}
-      ${b(Surface)}
-      ${b(Footer)}
+      ${$build(Header)}
+      ${$build(Surface)}
+      ${$build(Footer)}
+      ${$build(ModalWindow, $appState)}
     `
   }
 }

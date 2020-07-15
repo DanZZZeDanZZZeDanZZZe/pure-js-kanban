@@ -1,4 +1,4 @@
-import {isEqual, copyFields} from './utils'
+import {isEqual, copyFields, storage} from './utils'
 
 export class StoreSubscriber {
   constructor(store) {
@@ -22,6 +22,7 @@ export class StoreSubscriber {
         }
         updateComponents(componentTree.getState())
       }
+      storage('state', newState)
       prevState = copyFields(newState)
     })
   }

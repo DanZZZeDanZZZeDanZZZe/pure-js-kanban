@@ -3,7 +3,9 @@ import {
   adjustEl,
   capitalize,
   isEqual,
-  compose
+  compose,
+  storage,
+  normalize
 } from '@core/utils'
 import {AppComponent} from '@core/AppComponent'
 import DOMListener from '@core/DOMListener'
@@ -26,6 +28,8 @@ export {
   capitalize,
   isEqual,
   compose,
+  storage,
+  normalize,
   $
 }
 

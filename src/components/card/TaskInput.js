@@ -1,6 +1,7 @@
 import {AppComponent} from '@core'
 import {addingNewTask} from '../../state/actionCreators'
 import {App} from '@/core'
+import {normalize} from '../../core'
 
 class TaskInput extends AppComponent {
   constructor() {
@@ -29,7 +30,6 @@ class TaskInput extends AppComponent {
 
   prepare() {
     this.$extract('task-input').focus()
-    console.log('TaskInput -> prepare ->', this.$extract('task-input'))
   }
 }
 
@@ -43,10 +43,6 @@ function findDuplicate(title) {
     return [...newTitles, ...titles]
   }, [])
   return titles.indexOf(normalize(title)) !== -1 ? true : false
-}
-
-function normalize(str) {
-  return str.trim().toLowerCase()
 }
 
 export default TaskInput

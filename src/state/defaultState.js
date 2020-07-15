@@ -4,5 +4,6 @@ export const defaultState = {
   cards: cards.map(title => {
     return {title, tasks: []}
   }),
-  activeCard: null
+  activeCard: null,
+  modalWindow: null
 }

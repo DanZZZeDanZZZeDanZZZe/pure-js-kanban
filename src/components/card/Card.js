@@ -1,5 +1,5 @@
 import {AppComponent} from '@core'
-import {activateСard} from '../../state/actionCreators'
+import {activateСard, showTaskInfo} from '../../state/actionCreators'
 import TaskSelection from './TaskSelection'
 import TaskInput from './TaskInput'
 
@@ -19,13 +19,18 @@ class Card extends AppComponent {
     this.tasks = cards[index].tasks
     this.activity = $appState.activeCard === title
     this.abilityToAdd = checkAvailability(cards, index)
-
-    this.isCardButton = event => this.$calledOut('card-button', event)
   }
 
   onClick(event) {
-    if (this.isCardButton(event) && this.abilityToAdd) {
+    if (this.$calledOut('card-button', event) && this.abilityToAdd) {
       this.$dispatch(activateСard(this.title))
+    }
+    if (this.$calledOut('task', event)) {
+      const {textContent} = event.target
+      this.$dispatch(showTaskInfo({
+        title: textContent,
+        index: this.index
+      }))
     }
   }
 
@@ -65,7 +70,7 @@ class Card extends AppComponent {
 
 function createTasks(tasks) {
   return tasks
-      .map(task => `<div class="task">${task}</div>`)
+      .map(task => `<div class="task" data-type="task">${task.title}</div>`)
       .join('')
 }
 

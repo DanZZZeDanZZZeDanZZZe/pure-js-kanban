@@ -62,7 +62,7 @@
     margin-top: 15px;
 
     button {
-      @include button(white);
+      @include button(black);
       font-weight: bold;
       padding-right: 5px;
       display: flex;

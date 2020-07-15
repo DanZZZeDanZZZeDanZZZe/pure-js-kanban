@@ -1,4 +1,4 @@
-@mixin button($color: black) {
+@mixin button($def: white, $active: black, $back: none, $hover: rgba(238, 238, 238, 0.548)) {
   @include cleared-button();
   display: inline-block;
   position: relative;
@@ -7,6 +7,8 @@
   min-width: 30px;
   text-align: center;
   font-size: large;
+  color: $def;
+  background: $back;
   border-radius: 3px;
 
   & i {
@@ -14,11 +16,11 @@
   }
 
   &:active, &.active {
-    color: $color;
+    color: $active;
   }
 
   &:hover {
-    background: rgba(238, 238, 238, 0.548);
+    background: $hover;
     cursor: pointer;
     &:disabled {
       background: inherit;

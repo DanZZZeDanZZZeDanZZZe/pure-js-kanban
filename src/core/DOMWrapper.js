@@ -123,6 +123,10 @@ class DOMWrapper {
     this.el.focus()
   }
 
+  get text() {
+    return this.el.value.trim()
+  }
+
   get parent() {
     return $(this.el.parentNode)
   }
