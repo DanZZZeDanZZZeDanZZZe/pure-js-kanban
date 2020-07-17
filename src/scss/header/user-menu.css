@@ -1,0 +1,26 @@
+/* User menu */
+
+/* Button */
+
+.user-menu__button {
+  display: block;
+  position: relative;
+  width: 30px;
+  height: 20px;
+}
+
+.user-menu__button::before,
+.user-menu__button::after {
+  content: '';
+  background: white;
+  position: absolute;
+}
+
+
+.user-meynu__button::before {
+  
+}
+
+.user-menu__button::after {
+  
+}

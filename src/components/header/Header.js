@@ -3,7 +3,7 @@ import {AppComponent} from '@core'
 class Header extends AppComponent {
   constructor() {
     const options = {
-      classNames: 'header',
+      classNames: 'kanban__header header',
       tagName: 'header',
       events: ['click']
     }
@@ -15,14 +15,19 @@ class Header extends AppComponent {
   }
 
   render() {
+    const buttonClasses = [
+      'user-menu__button',
+      'cleared-button',
+    ]
+
     return `
-      <div>
+      <div class="header__logo">
         <h1>Kanban</h1>
       </div>
 
-      <div class="user-menu">
-        <button>
-          <i class="material-icons">all_inbox</i>        
+      <div class="header__user-menu user-menu">
+        <button class="${buttonClasses.join(' ')}">
+          <span></span>      
         </button>
       </div>
     `
