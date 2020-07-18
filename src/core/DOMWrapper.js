@@ -132,11 +132,11 @@ class DOMWrapper {
   }
 
   get first() {
-    return $(this.el.firstChild)
+    return $(this.el.firstElementChild)
   }
 
   get last() {
-    return $(this.el.lastChild)
+    return $(this.el.lastElementChild)
   }
 
   get previous() {
