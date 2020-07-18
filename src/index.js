@@ -1,5 +1,4 @@
 import '@/scss/index.scss'
-import '@/scripts'
 import Kanban from './components/kanban/Kanban'
 import {App} from '@/core'
 import {rootReducer} from './state/rootReducer'
