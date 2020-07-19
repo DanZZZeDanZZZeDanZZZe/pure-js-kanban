@@ -1,21 +1,12 @@
 import {AppComponent} from '@core'
 
 class Header extends AppComponent {
-  constructor(options) {
+  constructor() {
     super({
       classNames: 'kanban__header header',
       tagName: 'header',
-      // events: ['click']
     })
-
-    // this.activity = options?.activity
   }
-
-  // onClick() {
-  //   this.$notify('surface: lose focus')
-  //   const activity = this.activity ? false : true
-  //   this.$update({activity})
-  // }
 
   render() {
     const buttonClasses = [
@@ -30,24 +21,28 @@ class Header extends AppComponent {
         <button class="${buttonClasses.join(' ')}" data-type="button">
           <span></span>      
         </button>
+        <ul class="user-menu__list" data-type="list">
+          <li class="user-menu__item">Add card</li>
+          <li class="user-menu__item">Delete card</li>
+          <li class="user-menu__item">Delete completed tasks</li>
+        </ul>
       </div>
     `
   }
 
   prepare() {
-    const button = this.$extract('button')
-    button.on('click', () => {
-      button.classList.toggle('user-menu__button_active')
-    })
-    // const buttonClasses = this.$extract('button').classList
-    // console.log('button', this.$extract('button'))
-    // console.log('Header -> prepare -> buttonClasses', buttonClasses)
-    // if (this.activity) {
-    //   buttonClasses.add('user-menu__button_active')
-    // } else {
-    //   buttonClasses.remove('user-menu__button_active')
-    // }
-    // console.log('Header -> prepare -> buttonClasses', buttonClasses)
+    this.button = this.$extract('button')
+    this.list = this.$extract('list')
+    this.toggleMenu = () => {
+      this.button.classList.toggle('user-menu__button_active')
+      this.list.classList.toggle('user-menu__list_active')
+    }
+    this.button.on('click', this.toggleMenu)
+  }
+
+  beforeDestruction() {
+    console.log('уничтоженоо')
+    this.button.off('click', this.toggleMenu)
   }
 }
 
