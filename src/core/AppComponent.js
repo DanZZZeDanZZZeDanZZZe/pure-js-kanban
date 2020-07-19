@@ -28,6 +28,8 @@ class AppComponent extends DOMListener {
 
   prepare() {}
 
+  beforeDestruction() {}
+
   render() {
     return ''
   }
@@ -48,9 +50,10 @@ class AppComponent extends DOMListener {
     return this.app.store.getState()
   }
 
-  $destroy() {
+  destroy() {
     this.removeDOMListeners()
     this.unsubs.forEach(unsub => unsub())
+    this.beforeDestruction()
   }
 
   $listen(eventName, action) {
@@ -77,7 +80,6 @@ class AppComponent extends DOMListener {
   }
 
   $update(newOptions = {}) {
-    this.$destroy()
     const way = makeAWay(this.$root)
     const template = build(
         this.constructor,
@@ -87,7 +89,15 @@ class AppComponent extends DOMListener {
     )
     this.$root.outer(template)
     const $updatePoint = way()
-    this.app.tree.updateBranch($updatePoint, this.app.comps, this)
+
+    const {tree, comps} = this.app
+    const oldBranch = tree.findBranch(this)
+    tree.getInstances(oldBranch).forEach(i => i.destroy())
+
+    const newBranch = tree.createBranch(comps)
+    tree.replaceBranch(oldBranch, newBranch)
+    tree.connectToHTML($updatePoint, oldBranch)
+
     this.app.comps = []
   }
 
