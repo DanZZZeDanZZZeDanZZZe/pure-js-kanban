@@ -29,6 +29,11 @@ const cases = {
     task.text = text.trim()
     return state
   },
+
+  ['DELETE_COMPLETED_TASKS']: (state) => {
+    state.cards[state.cards.length - 1].tasks = []
+    return state
+  },
   default: state => state
 }
 

@@ -1,4 +1,5 @@
 import {AppComponent} from '@core'
+import {deleteCompletedTasks} from '@/state/actionCreators'
 
 class Header extends AppComponent {
   constructor() {
@@ -24,7 +25,10 @@ class Header extends AppComponent {
         <ul class="user-menu__list" data-type="list">
           <li class="user-menu__item">Add card</li>
           <li class="user-menu__item">Delete card</li>
-          <li class="user-menu__item">Delete completed tasks</li>
+          <li 
+            class="user-menu__item" 
+            data-type="delete-completed"
+          >Delete completed tasks</li>
         </ul>
       </div>
     `
@@ -33,16 +37,27 @@ class Header extends AppComponent {
   prepare() {
     this.button = this.$extract('button')
     this.list = this.$extract('list')
+    this.deleteCompletedItem = this.$extract('delete-completed')
+
     this.toggleMenu = () => {
       this.button.classList.toggle('user-menu__button_active')
       this.list.classList.toggle('user-menu__list_active')
     }
+
+    this.deleteCompleted = () => {
+      if (confirm('Delete all completed tasks?')) {
+        this.$dispatch(deleteCompletedTasks())
+        this.toggleMenu()
+      }
+    }
+
     this.button.on('click', this.toggleMenu)
+    this.deleteCompletedItem.on('click', this.deleteCompleted)
   }
 
   beforeDestruction() {
-    console.log('уничтоженоо')
     this.button.off('click', this.toggleMenu)
+    this.deleteCompletedItem.off('click', this.deleteCompleted)
   }
 }
 

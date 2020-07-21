@@ -4,7 +4,8 @@ import {
   ADDING_NEW_TASK,
   SHOW_TASK_INFO,
   CLOSE_MODAL_WINDOW,
-  ADDING_TASK_DESCRIPTION
+  ADDING_TASK_DESCRIPTION,
+  DELETE_COMPLETED_TASKS
 } from './types';
 
 export function activateСard(title) {
@@ -49,5 +50,11 @@ export function showTaskInfo(text) {
 export function closeModalWindow() {
   return {
     type: CLOSE_MODAL_WINDOW,
+  }
+}
+
+export function deleteCompletedTasks() {
+  return {
+    type: DELETE_COMPLETED_TASKS,
   }
 }
