@@ -1,10 +1,6 @@
 /* User menu */
 
 .user-menu {
-  display: grid;
-  grid-template-columns: 1fr min-content;
-  grid-template-rows: min-content 1fr;
-  grid-gap: 5px;
   z-index: 2;
 }
 
@@ -12,8 +8,6 @@
 
 .user-menu__button {
   display: block;
-  position: relative;
-  grid-column: 3 / 4;
   width: 30px;
   height: 20px;
 }
@@ -24,7 +18,7 @@
   top: 9px;
   height: 2px;
   width: 100%;
-  background-color: white;
+  background: white;
   transition: all 0.3s ease;
 }
 
@@ -64,20 +58,19 @@
 /* List */
 
 .user-menu__list {
-  grid-area: 1/1/-1/-1;
   width: 300px;
-  padding: 0;
   background-color: khaki;
   color: black;
   list-style-type: none;
   box-shadow: 0px 0px 18px 6px rgba(0, 0, 0, 0.67);
-  border-radius: 5px;
-  transform: scaleX(0);
+  transform: translateY(-150px);
+  opacity: 0;
   transition: all 0.2s ease-in;
 }
 
 .user-menu__list_active {
-  transform: scaleX(1);
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .user-menu__item {
@@ -96,4 +89,45 @@
   box-shadow: 0px 0px 18px 6px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transform: translate(-3%, 5%);
+}
+
+@media (max-width: 767px) {
+  .user-menu__list {
+    width: 100%;
+    padding: 30px;
+    border-radius: 0 0 5px 5px;
+  }
+
+  .user-menu__button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 4;
+  }
+
+  .user-menu__button_active span,
+  .user-menu__button_active::before,
+  .user-menu__button_active::after {
+    background: black;
+  }
+}
+
+@media (min-width: 768px) {
+  .user-menu {
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    grid-template-rows: min-content 1fr;
+    grid-gap: 5px;
+  }
+
+  .user-menu__list {
+    grid-area: 1/1/-1/-1;
+    padding: 0;
+    border-radius: 5px;
+  }
+
+  .user-menu__button {
+    position: relative;
+    grid-column: 3 / 4;
+  }
 }

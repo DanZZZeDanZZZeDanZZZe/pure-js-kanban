@@ -17,16 +17,18 @@
   &__content {
     display: flex;
     flex-direction: column;
-    box-shadow: 0px 0px 18px 6px rgba(0,0,0,0.67);
-    
-    .content__footer, .content__header {
+    box-shadow: 0px 0px 18px 6px rgba(0, 0, 0, 0.67);
+    z-index: 10;
+
+    .content__footer,
+    .content__header {
       display: flex;
       height: 15%;
       &__button {
         align-self: center;
         @include modal-w-button();
       }
-    } 
+    }
     .content__main {
       height: 70%;
       &__task-info {
@@ -44,6 +46,7 @@
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: 10;
     animation-name: desktop-modal-window-blackout;
     animation-duration: 600ms;
     animation-fill-mode: forwards;
@@ -65,7 +68,6 @@
     top: 0;
     right: 0;
     left: 0;
-    z-index: 1;
     background-color: $card-color;
     animation-name: mobile-modal-window-appears;
     animation-duration: 350ms;
