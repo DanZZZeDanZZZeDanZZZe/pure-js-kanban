@@ -20,6 +20,14 @@ const cases = {
     state.modalWindow = {type: 'task info', task}
     return state
   },
+  ['SHOW_CARD_DELETION']: (state) => {
+    state.modalWindow = {type: 'card delition'}
+    return state
+  },
+  ['SHOW_CARD_ADDING']: (state) => {
+    state.modalWindow = {type: 'card adding'}
+    return state
+  },
   ['CLOSE_MODAL_WINDOW']: (state) => {
     state.modalWindow = null
     return state

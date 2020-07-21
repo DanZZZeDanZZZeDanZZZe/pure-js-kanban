@@ -1,5 +1,9 @@
 import {AppComponent} from '@core'
-import {deleteCompletedTasks} from '@/state/actionCreators'
+import {
+  deleteCompletedTasks,
+  showCardDeletion,
+  showCardAdding
+} from '@/state/actionCreators'
 
 class Header extends AppComponent {
   constructor() {
@@ -23,8 +27,14 @@ class Header extends AppComponent {
           <span></span>      
         </button>
         <ul class="user-menu__list" data-type="list">
-          <li class="user-menu__item">Add card</li>
-          <li class="user-menu__item">Delete card</li>
+          <li 
+            class="user-menu__item"
+            data-type="adding-card"
+          >Add card</li>
+          <li 
+            class="user-menu__item"
+            data-type="delete-card"
+          >Delete card</li>
           <li 
             class="user-menu__item" 
             data-type="delete-completed"
@@ -38,6 +48,8 @@ class Header extends AppComponent {
     this.button = this.$extract('button')
     this.list = this.$extract('list')
     this.deleteCompletedItem = this.$extract('delete-completed')
+    this.deleteCardItem = this.$extract('delete-card')
+    this.addingCardItem = this.$extract('adding-card')
 
     this.toggleMenu = () => {
       this.button.classList.toggle('user-menu__button_active')
@@ -51,13 +63,28 @@ class Header extends AppComponent {
       }
     }
 
+    this.showCardDeletion = () => {
+      this.$dispatch(showCardDeletion())
+      this.toggleMenu()
+    }
+
+    this.showCardAdding = () => {
+      this.$dispatch(showCardAdding())
+      this.toggleMenu()
+    }
+
+
     this.button.on('click', this.toggleMenu)
     this.deleteCompletedItem.on('click', this.deleteCompleted)
+    this.deleteCardItem.on('click', this.showCardDeletion)
+    this.addingCardItem.on('click', this.showCardAdding)
   }
 
   beforeDestruction() {
     this.button.off('click', this.toggleMenu)
     this.deleteCompletedItem.off('click', this.deleteCompleted)
+    this.deleteCardItem.off('click', this.showCardDeletion)
+    this.addingCardItem.off('click', this.showCardAdding)
   }
 }
 

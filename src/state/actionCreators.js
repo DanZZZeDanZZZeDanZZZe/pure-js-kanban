@@ -3,9 +3,11 @@ import {
   SELECTING_TASK,
   ADDING_NEW_TASK,
   SHOW_TASK_INFO,
+  SHOW_CARD_DELETION,
   CLOSE_MODAL_WINDOW,
   ADDING_TASK_DESCRIPTION,
-  DELETE_COMPLETED_TASKS
+  DELETE_COMPLETED_TASKS,
+  SHOW_CARD_ADDING
 } from './types';
 
 export function activateСard(title) {
@@ -44,6 +46,18 @@ export function showTaskInfo(text) {
   return {
     type: SHOW_TASK_INFO,
     data: text
+  }
+}
+
+export function showCardDeletion() {
+  return {
+    type: SHOW_CARD_DELETION
+  }
+}
+
+export function showCardAdding() {
+  return {
+    type: SHOW_CARD_ADDING
   }
 }
 
