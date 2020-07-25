@@ -65,7 +65,7 @@ class DOMWrapper {
       this.el.dataset[name] = value
       return this
     }
-    return this.el.dataset
+    return this.el.dataset[name]
   }
 
   find(selector) {
