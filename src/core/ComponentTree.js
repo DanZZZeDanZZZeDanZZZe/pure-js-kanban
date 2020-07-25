@@ -31,7 +31,7 @@ export class CompnentTree {
 
   connectToHTML($root, branch = this.tree) {
     let $elements = $root.findAllData('type', 'component')
-    if ($root.dataset() === 'component') {
+    if ($root.dataset('type') === 'component') {
       $elements = [$root, ...$elements]
     }
     connect(branch)
