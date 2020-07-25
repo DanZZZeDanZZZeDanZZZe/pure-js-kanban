@@ -7,7 +7,7 @@ class Surface extends AppComponent {
     super({
       classNames: 'surface',
       tagName: 'main',
-      watch: 'length',
+      watch: ['cards'],
       events: ['keydown']
     })
   }

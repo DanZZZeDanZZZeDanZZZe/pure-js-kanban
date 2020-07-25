@@ -7,7 +7,8 @@ import {
   CLOSE_MODAL_WINDOW,
   ADDING_TASK_DESCRIPTION,
   DELETE_COMPLETED_TASKS,
-  SHOW_CARD_ADDING
+  SHOW_CARD_ADDING,
+  DELETE_CARDS
 } from './types';
 
 export function activateСard(title) {
@@ -70,5 +71,12 @@ export function closeModalWindow() {
 export function deleteCompletedTasks() {
   return {
     type: DELETE_COMPLETED_TASKS,
+  }
+}
+
+export function deleteCards(titles) {
+  return {
+    type: DELETE_CARDS,
+    data: {titles}
   }
 }

@@ -1,7 +1,8 @@
 import {AppComponent} from '@core'
 import {App} from '@/core'
-import {closeModalWindow} from '../../state/actionCreators'
+import {closeModalWindow} from '@/state/actionCreators'
 import TaskInfo from './TaskInfo'
+import CardsForDeletion from './CardsForDeletion'
 
 class ModalWindow extends AppComponent {
   constructor() {
@@ -89,6 +90,8 @@ function createContent(type, $build) {
   switch (type) {
     case 'task info':
       return $build(TaskInfo)
+    case 'card delition':
+      return $build(CardsForDeletion)
     default:
       return '<div></div>'
   }

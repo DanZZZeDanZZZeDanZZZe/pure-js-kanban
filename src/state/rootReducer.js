@@ -42,6 +42,12 @@ const cases = {
     state.cards[state.cards.length - 1].tasks = []
     return state
   },
+  ['DELETE_CARDS']: (state, {titles}) => {
+    state.cards = state.cards.filter(({title}) => {
+      return !titles.find(t => t === title)
+    })
+    return state
+  },
   default: state => state
 }
 

@@ -1,5 +1,3 @@
-@import "./task-info.scss";
-
 @mixin modal-w-button {
   @include button(white, black, $color-auxiliary);
   display: flex;

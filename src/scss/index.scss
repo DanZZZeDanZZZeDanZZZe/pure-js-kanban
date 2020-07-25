@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import "~normalize.css";
 
 @import "variables.css";
@@ -9,13 +9,15 @@
 @import "mixins";
 //@import "header";
 @import "header/header";
-@import 'header/user-menu';
+@import "header/user-menu";
 @import "surface";
 @import "card";
 @import "task-input";
 @import "task-selection";
 @import "footer";
 @import "./modal-window/modal-window.scss";
+@import "./modal-window/task-info.scss";
+@import "./modal-window/cards-for-deletion.css";
 
 * {
   margin: 0;
@@ -24,7 +26,7 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 12px;
   overflow: hidden;
 }

@@ -111,11 +111,16 @@ class DOMWrapper {
     return this.el.outerHTML
   }
 
-  inner(html) {
-    if (html) {
-      this.el.innerHTML= html
+  inner(content, text = false) {
+    if (content) {
+      if (text) {
+        this.el.innerText= content
+      } else {
+        this.el.innerHTML= content
+      }
       return this
     }
+    if (text) return this.el.innerText
     return this.el.innerHTML
   }
 
