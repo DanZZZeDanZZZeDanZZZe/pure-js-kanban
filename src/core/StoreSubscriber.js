@@ -17,6 +17,7 @@ export class StoreSubscriber {
           const {component, children} = branch
           if (checkChanges(component, changes)) {
             component.$update()
+            return true
           }
           children.forEach(c => updateComponents(c))
         }
