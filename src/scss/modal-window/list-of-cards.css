@@ -1,0 +1,58 @@
+/* List of cards */
+
+.list-of-cards {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(170px, 1fr);
+  grid-gap: 5px;
+  padding: 30px;
+  user-select: none;
+  height: 100%;
+  width: 100%;
+  background-color: khaki;
+  color: white;
+  font-size: 1.3rem;
+  overflow-x: auto;
+}
+
+/* Card */
+
+.list-of-cards__card {
+  position: relative;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(150px, 1fr);
+  grid-gap: 5px;
+  height: 120px;
+  margin-top: 30px;
+  padding-top: 10px;
+  padding: 30px;
+  text-align: center;
+  background: var(--primary-color);
+  border-radius: 5px;
+  transition: all 0.3s ease-out;
+}
+
+.list-of-cards__card::after,
+.list-of-cards__card::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  height: 3px;
+  background-color: white;
+}
+
+.list-of-cards__card::after {
+  bottom: 30px;
+  transition: all 0.2s ease-out;
+}
+
+.list-of-cards__card::before {
+  top: 60px;
+  transition: all 0.3s ease-out;
+}
+
+/* Added card */
+.list-of-cards__added-card {
+  margin-top: 30px;
+}
