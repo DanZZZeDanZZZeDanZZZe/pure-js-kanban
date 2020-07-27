@@ -4,7 +4,7 @@ import {deleteCards} from '../../state/actionCreators'
 class CardForDeletion extends AppComponent {
   constructor() {
     super({
-      classNames: 'list-of-cards',
+      classNames: 'list-of-cards list-of-cards_removable',
       tagName: 'div',
     })
   }
