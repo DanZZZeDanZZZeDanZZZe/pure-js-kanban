@@ -1,4 +1,9 @@
+const cards = ['Backlog', 'Ready', 'In progress', 'Finished']
+
 export const defaultState = {
-  length: 4,
-  width: 100,
+  cards: cards.map(title => {
+    return {title, tasks: []}
+  }),
+  activeCard: null,
+  modalWindow: null
 }

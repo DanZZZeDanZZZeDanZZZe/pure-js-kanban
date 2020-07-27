@@ -26,6 +26,18 @@ function isEqual(a, b) {
   return a === b
 }
 
+function copyFields(obj) {
+  return JSON.parse(JSON.stringify(obj))
+}
+
+function storage(key, value) {
+  if (value) {
+    localStorage.setItem(key, JSON.stringify(value))
+  } else {
+    return JSON.parse(localStorage.getItem(key))
+  }
+}
+
 function compose(...funcs) {
   if (funcs.length === 0) {
     return (arg) => arg
@@ -38,9 +50,16 @@ function compose(...funcs) {
   return funcs.reduce((a, b) => (...args) => a(b(...args)))
 }
 
+function normalize(str) {
+  return str.trim().toLowerCase()
+}
+
 export {
   adjustEl,
   capitalize,
   isEqual,
-  compose
+  compose,
+  copyFields,
+  storage,
+  normalize
 }

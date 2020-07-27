@@ -1,0 +1,19 @@
+/* Animation for remove */
+
+.list-of-cards_removable .list-of-cards__card:hover {
+  transform: translateY(5%);
+  cursor: pointer;
+}
+
+.list-of-cards_removable .list-of-cards__card_active {
+  background-color: var(--soft-red);
+}
+
+.list-of-cards_removable .list-of-cards__card_active::after {
+  transform: translateY(-30px);
+  opacity: 0;
+}
+
+.list-of-cards_removable .list-of-cards__card_active::before {
+  transform: translateY(-19px);
+}

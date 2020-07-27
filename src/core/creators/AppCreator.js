@@ -37,7 +37,6 @@ export class AppCreator {
   connect() {
     this.tree = new CompnentTree(this.comps)
         .connectToHTML(this.$point)
-    console.log('AppCreator -> connect -> this.tree ', this.tree )
     this.comps = []
     return this
   }

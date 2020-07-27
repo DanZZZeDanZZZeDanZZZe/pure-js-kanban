@@ -45,6 +45,10 @@ class DOMWrapper {
     this.el.append($el.el)
   }
 
+  get classList() {
+    return this.el.classList
+  }
+
   insertClasses(classNames) {
     if (typeof classNames === 'string') {
       classNames = classNames.trim().split(' ')
@@ -61,7 +65,7 @@ class DOMWrapper {
       this.el.dataset[name] = value
       return this
     }
-    return this.el.dataset
+    return this.el.dataset[name]
   }
 
   find(selector) {
@@ -73,6 +77,16 @@ class DOMWrapper {
         this.el.querySelectorAll(selector),
         el => $(el)
     )
+  }
+
+  closest(selector) {
+    if (!this.el.closest(selector)) return null
+    return $(this.el.closest(selector))
+  }
+
+  closestData(name, value) {
+    return $(this.el)
+        .closest(`[data-${name}="${value}"]`)
   }
 
   findData(name, value) {
@@ -97,12 +111,25 @@ class DOMWrapper {
     return this.el.outerHTML
   }
 
-  inner(html) {
-    if (html) {
-      this.el.innerHTML= html
+  inner(content, text = false) {
+    if (content) {
+      if (text) {
+        this.el.innerText= content
+      } else {
+        this.el.innerHTML= content
+      }
       return this
     }
+    if (text) return this.el.innerText
     return this.el.innerHTML
+  }
+
+  focus() {
+    this.el.focus()
+  }
+
+  get text() {
+    return this.el.value.trim()
   }
 
   get parent() {
@@ -110,11 +137,11 @@ class DOMWrapper {
   }
 
   get first() {
-    return $(this.el.firstChild)
+    return $(this.el.firstElementChild)
   }
 
   get last() {
-    return $(this.el.lastChild)
+    return $(this.el.lastElementChild)
   }
 
   get previous() {

@@ -1,0 +1,14 @@
+/* Cleared button */
+
+.cleared-button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  outline: none;
+  background-color: transparent;
+}
+
+.cleared-button:hover {
+  cursor: pointer;
+}

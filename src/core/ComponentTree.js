@@ -3,10 +3,10 @@ export class CompnentTree {
     this.tree = this.createBranch(components)
   }
 
-  createBranch(components, component = null) {
+  createBranch(components) {
     let comps = components
-
-    return createBranch(component)
+    const ancestor = this.findAncestor(comps)
+    return createBranch(ancestor)
 
     function createBranch(component) {
       if (component === null) {
@@ -31,7 +31,7 @@ export class CompnentTree {
 
   connectToHTML($root, branch = this.tree) {
     let $elements = $root.findAllData('type', 'component')
-    if ($root.dataset()['type'] === 'component') {
+    if ($root.dataset('type') === 'component') {
       $elements = [$root, ...$elements]
     }
     connect(branch)
@@ -39,8 +39,7 @@ export class CompnentTree {
     function connect(branch) {
       const $element = $elements.splice(0, 1)[0]
       const {children, component} = branch
-      component.init($element)
-
+      component.init($element).prepare()
       if (children.length !== 0) {
         children.forEach(c => connect(c))
       }
@@ -48,24 +47,12 @@ export class CompnentTree {
     return this
   }
 
-  updateBranch($updatePoint, components, oldComponent) {
-    const component = components.find(c => {
-      return !components.includes(c.parent)
-    })
-    const newBranch = this.createBranch(components, component)
-    const oldBranch = this.findBranch(oldComponent)
-
-    this.replaceBranch(oldBranch, newBranch)
-    this.connectToHTML($updatePoint, oldBranch)
-    return this
-  }
-
-  findBranch(comp) {
+  findBranch(compInstance) {
     const branch = this.tree
 
     const findBranch = branch => {
       const {component, children} = branch
-      if (component === comp) {
+      if (component === compInstance) {
         return branch
       }
       for (const key of children) {
@@ -81,6 +68,29 @@ export class CompnentTree {
     oldBranch.component = newBranch.component
     oldBranch.children = newBranch.children
     return this
+  }
+
+  findAncestor(comps) {
+    return comps.find(c => {
+      return !comps.includes(c.parent)
+    })
+  }
+
+  getInstances(branch) {
+    const instances = []
+
+    const findInstance = branch => {
+      const {component, children} = branch
+      instances.push(component)
+
+      for (const key of children) {
+        const branch = findInstance(key)
+        if (branch) return branch
+      }
+    }
+
+    findInstance(branch)
+    return instances
   }
 
   getState() {
