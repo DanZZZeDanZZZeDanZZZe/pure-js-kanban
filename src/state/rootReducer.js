@@ -48,6 +48,16 @@ const cases = {
     })
     return state
   },
+  ['ADD_CARDS']: (state, {namesOfNewCard}) => {
+    const cards = []
+    namesOfNewCard.forEach((newCard, index) => {
+      if (newCard !== '') cards.push({title: newCard, tasks: []})
+      const oldCards = state.cards
+      if (index < oldCards.length) cards.push(state.cards[index])
+    })
+    state.cards = [...cards]
+    return state
+  },
   default: state => state
 }
 

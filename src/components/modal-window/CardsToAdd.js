@@ -1,4 +1,5 @@
 import {AppComponent} from '@core'
+import {addCards} from '@/state/actionCreators'
 
 class CardsToAdd extends AppComponent {
   constructor() {
@@ -24,6 +25,7 @@ class CardsToAdd extends AppComponent {
         <input
           class="added-card__input"
           type="text"
+          data-type="input"
         >
         </input>
       </div>
@@ -48,12 +50,6 @@ class CardsToAdd extends AppComponent {
 
   toggleAddedCard(card) {
     card.classList.toggle('added-card_active')
-    // const type = card.dataset('type')
-    // if (type === 'card') {
-    //   card.dataset('type', 'card-active')
-    // } else {
-    //   card.dataset('type', 'card')
-    // }
   }
 
   render() {
@@ -64,18 +60,14 @@ class CardsToAdd extends AppComponent {
     this.cards = this.$extractAll('added-card')
     this.cards.forEach(card => {
       card.on('click', e => {
-        console.log('prepare -> e', e)
         if (this.$calledOut('button', e)) {
           this.toggleAddedCard(card)
         }
       } )
     })
     this.$listen('ModalWindow: pressing ok', () => {
-      // const removableСards = this.$extractAll('card-active')
-      // const titles = removableСards.map(card => {
-      //   return card.findData('type', 'card-title').inner(null, true)
-      // })
-      // this.$dispatch(deleteCards(titles))
+      const namesOfNewCard = this.$extractAll('input').map(input => input.text)
+      this.$dispatch(addCards(namesOfNewCard))
     })
   }
 

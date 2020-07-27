@@ -8,7 +8,8 @@ import {
   ADDING_TASK_DESCRIPTION,
   DELETE_COMPLETED_TASKS,
   SHOW_CARD_ADDING,
-  DELETE_CARDS
+  DELETE_CARDS,
+  ADD_CARDS
 } from './types';
 
 export function activateСard(title) {
@@ -78,5 +79,12 @@ export function deleteCards(titles) {
   return {
     type: DELETE_CARDS,
     data: {titles}
+  }
+}
+
+export function addCards(namesOfNewCard) {
+  return {
+    type: ADD_CARDS,
+    data: {namesOfNewCard}
   }
 }
